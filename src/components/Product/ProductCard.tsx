@@ -15,7 +15,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const isInWishlist = wishlist.includes(product.id);
 
   const formatPrice = (price: number) => {
-    const symbol = currency === 'EGP' ? 'ج.م' : currency === 'USD' ? '$' : '€';
+    const symbol = currency === 'EGP' ? 'EGP' : currency === 'USD' ? '$' : '€';
     const convertedPrice = currency === 'EGP' ? price : currency === 'USD' ? price / 30 : price / 32;
     return `${convertedPrice.toFixed(2)} ${symbol}`;
   };
@@ -34,70 +34,83 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     : 0;
 
   return (
-    <div className="group relative bg-white rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300">
-      <div className="relative overflow-hidden rounded-t-lg">
-        <Link to={`/product/${product.id}`}>
+    <div className="group relative bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
+      <Link to={`/product/${product.id}`}>
+        <div className="relative aspect-square overflow-hidden">
           <img
-            src={product.images[0]}
+            src={product.images[0] || "/placeholder.svg"}
             alt={isRTL ? product.nameAr : product.name}
-            className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+            className="object-cover group-hover:scale-105 transition-transform duration-300"
           />
-        </Link>
-        
-        {/* Badges */}
-        <div className={`absolute top-2 flex flex-col space-y-1 ${isRTL ? 'right-2' : 'left-2'}`}>
-          {product.newArrival && (
-            <span className="bg-green-500 text-white text-xs px-2 py-1 rounded-full">
-              NEW
-            </span>
-          )}
-          {discountPercentage > 0 && (
-            <span className="bg-red-500 text-white text-xs px-2 py-1 rounded-full">
-              -{discountPercentage}%
-            </span>
-          )}
-          {product.bestseller && (
-            <span className="bg-gold-accent text-gray-900 text-xs px-2 py-1 rounded-full">
-              BESTSELLER
-            </span>
-          )}
-        </div>
 
-        {/* Wishlist Button */}
-        <button
-          onClick={handleWishlistToggle}
-          className={`absolute top-2 p-2 bg-white rounded-full shadow-md hover:shadow-lg transition-all duration-200 ${isRTL ? 'left-2' : 'right-2'}`}
-        >
-          {isInWishlist ? (
-            <HeartIconSolid className="w-5 h-5 text-red-500" />
-          ) : (
-            <HeartIcon className="w-5 h-5 text-gray-600 hover:text-red-500" />
-          )}
-        </button>
-      </div>
+          {/* Badges */}
+          <div className={`absolute top-3 flex flex-col gap-2 ${isRTL ? 'right-3' : 'left-3'}`}>
+            {product.newArrival && (
+              <span className="bg-[#4A9B8E] text-white text-xs px-2 py-1 rounded-full hover:bg-[#4A9B8E]">
+                NEW
+              </span>
+            )}
+            {discountPercentage > 0 && (
+              <span className="bg-red-500 text-white text-xs px-2 py-1 rounded-full">
+                {discountPercentage}% OFF
+              </span>
+            )}
+          </div>
 
-      <div className="p-4">
-        <div className="flex items-center justify-between mb-2">
-          <span className="text-sm text-gray-500">
-            {isRTL ? product.categoryAr : product.category}
-          </span>
-          <div className="flex items-center">
-            <StarIcon className="w-4 h-4 text-yellow-400 fill-current" />
-            <span className="text-sm text-gray-600 ml-1">
-              {product.rating} ({product.reviewCount})
-            </span>
+          {/* Wishlist Button */}
+          <button
+            onClick={handleWishlistToggle}
+            className={`absolute top-3 p-2 bg-white/80 rounded-full hover:bg-white shadow-md hover:shadow-lg transition-all duration-200 ${isRTL ? 'left-3' : 'right-3'}`}
+          >
+            {isInWishlist ? (
+              <HeartIconSolid className="h-4 w-4 fill-red-500 text-red-500" />
+            ) : (
+              <HeartIcon className="h-4 w-4 text-gray-600" />
+            )}
+          </button>
+
+          {/* Quick Add to Cart - shown on hover */}
+          <div className="absolute bottom-3 left-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <button
+              className="w-full bg-[#D4A574] hover:bg-[#C19660] text-white text-sm px-4 py-2 rounded"
+              onClick={(e) => {
+                e.preventDefault();
+                // Assuming addToCart is added to useStore in the future
+                // For now, this is a placeholder to match the style
+              }}
+            >
+              Add to Cart
+            </button>
           </div>
         </div>
 
-        <Link to={`/product/${product.id}`}>
-          <h3 className="font-semibold text-gray-900 mb-2 hover:text-egyptian-blue transition-colors line-clamp-2">
+        <div className="p-4">
+          <div className="text-xs text-[#D4A574] font-medium mb-1">
+            {(isRTL ? product.categoryAr : product.category)?.replace("-", " ").toUpperCase()}
+          </div>
+
+          <h3 className="text-sm font-medium text-gray-900 line-clamp-2 mb-2 group-hover:text-[#D4A574] transition-colors">
             {isRTL ? product.nameAr : product.name}
           </h3>
-        </Link>
 
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <span className="text-lg font-bold text-gray-900">
+          {/* Rating */}
+          {product.rating && (
+            <div className="flex items-center gap-1 mb-2">
+              <div className="flex">
+                {[...Array(5)].map((_, i) => (
+                  <StarIcon
+                    key={i}
+                    className={`h-3 w-3 ${i < Math.floor(product.rating) ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}`}
+                  />
+                ))}
+              </div>
+              <span className="text-xs text-gray-500">({product.reviewCount})</span>
+            </div>
+          )}
+
+          {/* Price */}
+          <div className="flex items-center gap-2 mb-3">
+            <span className="text-lg font-semibold text-gray-900">
               {formatPrice(product.price)}
             </span>
             {product.originalPrice && (
@@ -106,31 +119,25 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               </span>
             )}
           </div>
-          
-          {product.stock > 0 ? (
-            <span className="text-sm text-green-600">In Stock</span>
-          ) : (
-            <span className="text-sm text-red-600">Out of Stock</span>
-          )}
-        </div>
 
-        {/* Color Options Preview */}
-        <div className={`flex space-x-2 mt-3 ${isRTL ? 'space-x-reverse' : ''}`}>
-          {product.colors.slice(0, 4).map((color, index) => (
-            <div
-              key={index}
-              className="w-6 h-6 rounded-full border-2 border-gray-200"
-              style={{ backgroundColor: color.hex }}
-              title={isRTL ? color.nameAr : color.name}
-            />
-          ))}
-          {product.colors.length > 4 && (
-            <div className="w-6 h-6 rounded-full border-2 border-gray-200 bg-gray-100 flex items-center justify-center">
-              <span className="text-xs text-gray-600">+{product.colors.length - 4}</span>
-            </div>
-          )}
+          {/* Color Swatches */}
+          <div className={`flex gap-1 ${isRTL ? 'space-x-reverse' : ''}`}>
+            {product.colors.slice(0, 4).map((color, index) => (
+              <div
+                key={index}
+                className="w-4 h-4 rounded-full border border-gray-200"
+                style={{ backgroundColor: color.hex }}
+                title={isRTL ? color.nameAr : color.name}
+              />
+            ))}
+            {product.colors.length > 4 && (
+              <div className="w-4 h-4 rounded-full border border-gray-200 bg-gray-100 flex items-center justify-center">
+                <span className="text-xs text-gray-600">+{product.colors.length - 4}</span>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
+      </Link>
     </div>
   );
 };
