@@ -124,15 +124,16 @@ const Header: React.FC = () => {
 
             {/* Actions */}
             <div className={`flex items-center space-x-4 ${isRTL ? 'space-x-reverse' : ''}`}>
-              <Link to="/account" className="p-2 hover:text-[var(--primary-color)] transition-colors" aria-label={t('account')}>
+              <Link to="/account" className="p-2 hover:text-[var(--primary-color)] transition-colors no-bg-dark" aria-label={t('account')}>
                 <UserIcon className="w-6 h-6" />
               </Link>
-              <Link to="/wishlist" className="p-2 hover:text-[var(--primary-color)] transition-colors" aria-label={t('wishlist')}>
+              <Link to="/wishlist" className="p-2 hover:text-[var(--primary-color)] transition-colors no-bg-dark" aria-label={t('wishlist')}>
                 <HeartIcon className="w-6 h-6" />
               </Link>
+              
               <button
                 onClick={() => setCartOpen(true)}
-                className="p-2 hover:text-[var(--primary-color)] transition-colors relative"
+                className="p-2 hover:text-[var(--primary-color)] transition-colors relative no-bg-dark"
                 aria-label={t('openCart', { count: cartItemsCount })}
               >
                 <ShoppingBagIcon className="w-6 h-6" />
@@ -144,8 +145,9 @@ const Header: React.FC = () => {
               </button>
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden p-2"
+                className="md:hidden p-2 no-bg-dark"
                 aria-label={mobileMenuOpen ? t('closeMenu') : t('openMenu')}
+                aria-expanded={mobileMenuOpen}
               >
                 {mobileMenuOpen ? <XMarkIcon className="w-6 h-6" /> : <Bars3Icon className="w-6 h-6" />}
               </button>

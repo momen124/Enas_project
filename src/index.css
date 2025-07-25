@@ -97,6 +97,13 @@ button:hover {
   color: var(--cream-white-500);
 }
 
+/* Override for icon buttons in dark mode */
+.dark .no-bg-dark,
+[data-theme="dark"] .no-bg-dark {
+  background-color: transparent !important;
+  color: var(--text-color); /* Ensure text/icon color matches theme */
+}
+
 .MegaMenu {
   background-color: var(--card-bg-color);
   border-color: var(--border-color);

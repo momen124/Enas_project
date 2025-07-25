@@ -87,4 +87,5 @@ export interface Category {
   nameAr: string;
   slug: string;
   children?: Category[];
+  image?: string;
 }
