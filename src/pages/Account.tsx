@@ -47,8 +47,8 @@ const Account: React.FC = () => {
           <div className="bg-white rounded-lg shadow-sm border p-6">
             {/* User Info */}
             <div className="text-center mb-6 pb-6 border-b">
-              <div className="w-16 h-16 bg-egyptian-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                <UserIcon className="w-8 h-8 text-egyptian-blue-600" />
+              <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                <UserIcon className="w-8 h-8 text-primary-600" />
               </div>
               <h3 className="font-semibold text-gray-900">
                 {user ? `${user.firstName} ${user.lastName}` : 'Guest User'}
@@ -69,7 +69,7 @@ const Account: React.FC = () => {
                     to={item.path}
                     className={`flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors ${
                       isActive 
-                        ? 'bg-egyptian-blue-50 text-egyptian-blue-700 border-r-2 border-egyptian-blue-700' 
+                        ? 'bg-primary-50 text-primary-700 border-r-2 border-primary-700' 
                         : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                     } ${isRTL ? 'space-x-reverse border-r-0 border-l-2' : ''}`}
                   >

@@ -140,7 +140,7 @@ const AccountAddresses: React.FC = () => {
           <h2 className="text-xl font-semibold text-[var(--text-color)]">Delivery Addresses</h2>
           <button
             onClick={() => setShowForm(true)}
-            className="bg-[var(--primary-color)] text-[var(--cream-white-500)] px-4 py-2 rounded-lg hover:bg-[var(--egyptian-blue-800)] transition-colors flex items-center space-x-2"
+            className="bg-[var(--primary-color)] text-[var(--cream-white-500)] px-4 py-2 rounded-lg hover:bg-[var(--primary-800)] transition-colors flex items-center space-x-2"
           >
             <PlusIcon className="w-4 h-4" />
             <span>Add New Address</span>
@@ -294,7 +294,7 @@ const AccountAddresses: React.FC = () => {
             <div className="flex space-x-4 pt-4">
               <button
                 type="submit"
-                className="bg-[var(--primary-color)] text-[var(--cream-white-500)] px-6 py-2 rounded-lg hover:bg-[var(--egyptian-blue-800)] transition-colors"
+                className="bg-[var(--primary-color)] text-[var(--cream-white-500)] px-6 py-2 rounded-lg hover:bg-[var(--primary-800)] transition-colors"
               >
                 {editingId ? 'Update Address' : 'Add Address'}
               </button>
@@ -344,7 +344,7 @@ const AccountAddresses: React.FC = () => {
                 {!address.isDefault && (
                   <button
                     onClick={() => handleSetDefault(address.id)}
-                    className="text-sm text-[var(--primary-color)] hover:text-[var(--egyptian-blue-800)] transition-colors"
+                    className="text-sm text-[var(--primary-color)] hover:text-[var(--primary-800)] transition-colors"
                   >
                     Set Default
                   </button>

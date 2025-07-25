@@ -72,7 +72,7 @@ const Header: React.FC = () => {
             <div className={`flex items-center space-x-4 ${isRTL ? 'space-x-reverse' : ''}`}>
               <button
                 onClick={toggleLanguage}
-                className="hover:text-[var(--gold-accent-500)] transition-colors"
+                className="hover:text-[var(--secondary-500)] transition-colors"
                 aria-label={t('toggleLanguage', { lang: language === 'en' ? 'Arabic' : 'English' })}
                 aria-pressed={language === 'en' ? 'false' : 'true'}
               >
@@ -131,18 +131,20 @@ const Header: React.FC = () => {
                 <HeartIcon className="w-6 h-6" />
               </Link>
               
-              <button
-                onClick={() => setCartOpen(true)}
-                className="p-2 hover:text-[var(--primary-color)] transition-colors relative no-bg-dark"
-                aria-label={t('openCart', { count: cartItemsCount })}
-              >
-                <ShoppingBagIcon className="w-6 h-6" />
-                {cartItemsCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                    {cartItemsCount}
-                  </span>
-                )}
-              </button>
+<button
+  onClick={() => setCartOpen(true)}
+  className="p-2 hover:text-accent-500 transition-colors relative"
+  aria-label={t('openCart', { count: cartItemsCount })}
+>
+  <span className="inline-block bg-transparent p-1">
+    <ShoppingBagIcon className="w-6 h-6 text-secondary-500" />
+  </span>
+  {cartItemsCount > 0 && (
+    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+      {cartItemsCount}
+    </span>
+  )}
+</button>
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className="md:hidden p-2 no-bg-dark"

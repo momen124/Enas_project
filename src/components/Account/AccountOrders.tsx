@@ -158,7 +158,7 @@ const AccountOrders: React.FC = () => {
           </p>
           <Link
             to="/shop"
-            className="bg-[var(--primary-color)] text-[var(--cream-white-500)] px-6 py-3 rounded-lg hover:bg-[var(--egyptian-blue-800)] transition-colors inline-block"
+            className="bg-[var(--primary-color)] text-[var(--cream-white-500)] px-6 py-3 rounded-lg hover:bg-[var(--primary-800)] transition-colors inline-block"
           >
             Start Shopping
           </Link>
@@ -188,7 +188,7 @@ const AccountOrders: React.FC = () => {
                       <p className="font-semibold text-[var(--text-color)]">{formatPrice(order.total)}</p>
                       <p className="text-sm text-[var(--secondary-text-color)]">{order.items.length} item(s)</p>
                     </div>
-                    <button className="flex items-center space-x-2 text-[var(--primary-color)] hover:text-[var(--egyptian-blue-800)] transition-colors">
+                    <button className="flex items-center space-x-2 text-[var(--primary-color)] hover:text-[var(--primary-800)] transition-colors">
                       <EyeIcon className="w-4 h-4" />
                       <span>View Details</span>
                     </button>
@@ -227,7 +227,7 @@ const AccountOrders: React.FC = () => {
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-6 pt-6 border-t border-[var(--border-color)]">
                   <div className="flex space-x-4 mb-4 sm:mb-0">
                     {order.status === 'delivered' && (
-                      <button className="text-[var(--primary-color)] hover:text-[var(--egyptian-blue-800)] transition-colors">
+                      <button className="text-[var(--primary-color)] hover:text-[var(--primary-800)] transition-colors">
                         Write Review
                       </button>
                     )}
@@ -242,7 +242,7 @@ const AccountOrders: React.FC = () => {
                   </div>
                   
                   {(order.status === 'shipped' || order.status === 'delivered') && (
-                    <button className="text-[var(--primary-color)] hover:text-[var(--egyptian-blue-800)] transition-colors flex items-center space-x-2">
+                    <button className="text-[var(--primary-color)] hover:text-[var(--primary-800)] transition-colors flex items-center space-x-2">
                       <TruckIcon className="w-4 h-4" />
                       <span>Track Package</span>
                     </button>

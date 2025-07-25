@@ -1,37 +1,37 @@
+/* src/index.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* src/index.css */
 :root {
   /* Light theme (default) */
-  --background-color: #ffffff;
-  --text-color: #1f2937;
-  --secondary-text-color: #4b5563;
-  --border-color: #e5e7eb;
-  --hover-bg-color: #f9fafb;
-  --primary-color: #1e6ad6; /* Egyptian Blue 500 */
-  --card-bg-color: #ffffff;
+  --background-color: #eddccf; /* primary-300 (Stark White) */
+  --text-color: #5e5042; /* secondary-500 (Kabul) */
+  --secondary-text-color: #847d75; /* neutral-500 (Friar Gray) */
+  --border-color: #aaa9a3; /* neutral-400 */
+  --hover-bg-color: #f4ede5; /* primary-100 */
+  --primary-color: #817474; /* accent-500 (Spicy Pink) */
+  --card-bg-color: #faf6f2; /* primary-50 */
   --shadow-color: rgba(0, 0, 0, 0.1);
-  --egyptian-blue-800: #10346e; /* Matches your Tailwind config */
-  --deep-navy-500: #0f263e; /* Matches your Tailwind config */
-  --cream-white-500: #f8eed0; /* Added for consistency */
+  --secondary-800: #2f2822; /* secondary-800 (Kabul) */
+  --neutral-800: #5a534e; /* neutral-800 (Friar Gray) */
+  --accent-800: #584d4d; /* accent-800 (Spicy Pink) */
 }
 
 .dark,
 [data-theme="dark"] {
-  /* Dark theme - Softer and user-friendly palette */
-  --background-color: #2a3446;
-  --text-color: #e0e7ff;
-  --secondary-text-color: #a3bffa;
-  --border-color: #3f4a5a;
-  --hover-bg-color: #3d4b5e;
-  --primary-color: #4dabbf;
-  --card-bg-color: #2e3a4f;
+  /* Dark theme */
+  --background-color: #2f2822; /* secondary-800 (Kabul) */
+  --text-color: #faf6f2; /* primary-50 (Stark White) */
+  --secondary-text-color: #d4d4d1; /* neutral-200 (Friar Gray) */
+  --border-color: #4c4541; /* neutral-900 */
+  --hover-bg-color: #4e4237; /* secondary-600 */
+  --primary-color: #817474; /* accent-500 (Spicy Pink) */
+  --card-bg-color: #3e3734; /* neutral-950 */
   --shadow-color: rgba(0, 0, 0, 0.15);
-  --egyptian-blue-800: #081632; /* Darker variant for dark mode */
-  --deep-navy-500: #02080d; /* Darker variant for dark mode */
-  --cream-white-500: #f8eed0; /* Retained for dark mode buttons */
+  --secondary-800: #2f2822; /* secondary-800 (Kabul) */
+  --neutral-800: #5a534e; /* neutral-800 (Friar Gray) */
+  --accent-800: #584d4d; /* accent-800 (Spicy Pink) */
 }
 
 * {
@@ -82,28 +82,36 @@ textarea:focus {
 }
 
 button {
-  background-color: var(--card-bg-color);
+  background-color: transparent; /* Removed default card-bg-color to avoid shadow */
   color: var(--text-color);
-  transition: background-color 0.3s, color 0.3s;
+  transition: color 0.3s;
+  padding: 0.5rem; /* Adjusted padding for consistency */
 }
 
 button:hover {
-  background-color: var(--hover-bg-color);
+  color: var(--primary-color); /* Simplified hover effect */
 }
 
 .dark button,
 [data-theme="dark"] button {
-  background-color: var(--primary-color);
-  color: var(--cream-white-500);
+  color: var(--text-color); /* Ensure text color matches dark theme */
 }
 
-/* Override for icon buttons in dark mode */
-.dark .no-bg-dark,
-[data-theme="dark"] .no-bg-dark {
+/* Style for icon container to remove unwanted background */
+button span {
+  background-color: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ensure icon itself has no background or padding issues */
+.ShoppingBagIcon {
   background-color: transparent !important;
-  color: var(--text-color); /* Ensure text/icon color matches theme */
+  padding: 0 !important;
 }
 
+/* MegaMenu styling remains unchanged */
 .MegaMenu {
   background-color: var(--card-bg-color);
   border-color: var(--border-color);

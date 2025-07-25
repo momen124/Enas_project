@@ -77,7 +77,7 @@ const ProductListItem: React.FC<ProductListItemProps> = ({ product }) => {
           {/* Badges */}
           <div className={`absolute top-3 flex flex-col gap-2 ${isRTL ? 'right-3' : 'left-3'}`}>
             {product.newArrival && (
-              <span className="bg-gold-accent-500 text-deep-navy-900 text-xs px-2 py-1 rounded-full">
+              <span className="bg-secondary-500 text-deep-navy-900 text-xs px-2 py-1 rounded-full">
                 {t('new')}
               </span>
             )}
@@ -98,7 +98,7 @@ const ProductListItem: React.FC<ProductListItemProps> = ({ product }) => {
                   {(isRTL ? product.categoryAr : product.category)?.replace("-", " ").toUpperCase()}
                 </div>
                 <Link to={`/product/${product.id}`}>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-gold-accent-500 transition-colors">
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-secondary-500 transition-colors">
                     {isRTL ? product.nameAr : product.name}
                   </h3>
                 </Link>
@@ -171,7 +171,7 @@ const ProductListItem: React.FC<ProductListItemProps> = ({ product }) => {
               <button
                 
                 disabled={product.stock === 0}
-                className="bg-gold-accent-500 text-deep-navy-900 py-3 px-6 rounded-lg hover:bg-gold-accent-600 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center space-x-2"
+                className="bg-secondary-500 text-deep-navy-900 py-3 px-6 rounded-lg hover:bg-secondary-600 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center space-x-2"
               >
                 <ShoppingBagIcon className="w-5 h-5" />
                 <span>{t('quickAdd')}</span>

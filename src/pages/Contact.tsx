@@ -61,7 +61,7 @@ const Contact: React.FC = () => {
   return (
     <div className="bg-white">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-egyptian-blue-900 to-egyptian-blue-700 text-white py-16">
+      <section className="bg-gradient-to-r from-primary-900 to-primary-700 text-white py-16">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             {isRTL ? 'تواصل معنا' : 'Contact Us'}
@@ -83,15 +83,15 @@ const Contact: React.FC = () => {
               const Icon = method.icon;
               return (
                 <div key={index} className="text-center p-6 bg-white rounded-lg shadow-sm border hover:shadow-md transition-shadow">
-                  <div className="w-16 h-16 bg-egyptian-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Icon className="w-8 h-8 text-egyptian-blue-600" />
+                  <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Icon className="w-8 h-8 text-primary-600" />
                   </div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-2">
                     {method.title}
                   </h3>
                   <div className="space-y-1 mb-2">
                     {method.details.map((detail, idx) => (
-                      <p key={idx} className="text-egyptian-blue-600 font-medium">
+                      <p key={idx} className="text-primary-600 font-medium">
                         {detail}
                       </p>
                     ))}
@@ -127,7 +127,7 @@ const Contact: React.FC = () => {
                       required
                       value={formData.name}
                       onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                      className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-egyptian-blue-500"
+                      className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
                     />
                   </div>
                   <div>
@@ -139,7 +139,7 @@ const Contact: React.FC = () => {
                       required
                       value={formData.email}
                       onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                      className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-egyptian-blue-500"
+                      className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
                     />
                   </div>
                 </div>
@@ -153,7 +153,7 @@ const Contact: React.FC = () => {
                       type="tel"
                       value={formData.phone}
                       onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
-                      className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-egyptian-blue-500"
+                      className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
                     />
                   </div>
                   <div>
@@ -164,7 +164,7 @@ const Contact: React.FC = () => {
                       required
                       value={formData.subject}
                       onChange={(e) => setFormData(prev => ({ ...prev, subject: e.target.value }))}
-                      className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-egyptian-blue-500"
+                      className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
                     >
                       <option value="">
                         {isRTL ? 'اختر الموضوع' : 'Select Subject'}
@@ -198,13 +198,13 @@ const Contact: React.FC = () => {
                     value={formData.message}
                     onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
                     placeholder={isRTL ? 'اكتب رسالتك هنا...' : 'Write your message here...'}
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-egyptian-blue-500"
+                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full bg-egyptian-blue-600 text-white py-3 px-6 rounded-lg hover:bg-egyptian-blue-700 transition-colors font-semibold"
+                  className="w-full bg-primary-600 text-white py-3 px-6 rounded-lg hover:bg-primary-700 transition-colors font-semibold"
                 >
                   {isRTL ? 'إرسال الرسالة' : 'Send Message'}
                 </button>
@@ -216,7 +216,7 @@ const Contact: React.FC = () => {
               {/* Office Location */}
               <div className="bg-white rounded-lg shadow-sm border p-6">
                 <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                  <MapPinIcon className="w-6 h-6 mr-2 text-egyptian-blue-600" />
+                  <MapPinIcon className="w-6 h-6 mr-2 text-primary-600" />
                   {isRTL ? 'موقعنا' : 'Our Location'}
                 </h3>
                 <div className="space-y-2 text-gray-600">
@@ -238,7 +238,7 @@ const Contact: React.FC = () => {
               {/* Business Hours */}
               <div className="bg-white rounded-lg shadow-sm border p-6">
                 <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                  <ClockIcon className="w-6 h-6 mr-2 text-egyptian-blue-600" />
+                  <ClockIcon className="w-6 h-6 mr-2 text-primary-600" />
                   {isRTL ? 'ساعات العمل' : 'Business Hours'}
                 </h3>
                 <div className="space-y-2 text-gray-600">

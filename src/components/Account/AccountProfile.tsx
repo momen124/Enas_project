@@ -46,7 +46,7 @@ const AccountProfile: React.FC = () => {
           <h2 className="text-xl font-semibold text-[var(--text-color)]">Profile Information</h2>
           <button
             onClick={() => setIsEditing(!isEditing)}
-            className="flex items-center space-x-2 text-[var(--primary-color)] hover:text-[var(--egyptian-blue-800)]"
+            className="flex items-center space-x-2 text-[var(--primary-color)] hover:text-[var(--primary-800)]"
           >
             <PencilIcon className="w-4 h-4" />
             <span>{isEditing ? 'Cancel' : 'Edit'}</span>
@@ -107,7 +107,7 @@ const AccountProfile: React.FC = () => {
             <div className="flex space-x-4">
               <button
                 type="submit"
-                className="bg-[var(--primary-color)] text-[var(--cream-white-500)] px-6 py-2 rounded-lg hover:bg-[var(--egyptian-blue-800)] transition-colors"
+                className="bg-[var(--primary-color)] text-[var(--cream-white-500)] px-6 py-2 rounded-lg hover:bg-[var(--primary-800)] transition-colors"
               >
                 Save Changes
               </button>
@@ -187,7 +187,7 @@ const AccountProfile: React.FC = () => {
             <span>Progress to Platinum</span>
             <span>{currentUser.loyaltyPoints}/1000 points</span>
           </div>
-          <div className="w-full bg-[var(--egyptian-blue-800)] rounded-full h-2">
+          <div className="w-full bg-[var(--primary-800)] rounded-full h-2">
             <div 
               className="bg-yellow-400 dark:bg-yellow-300 h-2 rounded-full transition-all duration-300"
               style={{ width: `${(currentUser.loyaltyPoints / 1000) * 100}%` }}

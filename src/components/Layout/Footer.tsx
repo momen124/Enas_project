@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="col-span-1">
-            <h3 className="text-2xl font-bold text-gold-accent mb-4">
+            <h3 className="text-2xl font-bold text-secondary mb-4">
               Cmon Elsonon
             </h3>
             <p className="text-gray-300 mb-4">
@@ -24,13 +24,13 @@ const Footer: React.FC = () => {
               }
             </p>
             <div className={`flex space-x-4 ${isRTL ? 'space-x-reverse' : ''}`}>
-              <a href="#" className="text-gray-300 hover:text-gold-accent transition-colors">
+              <a href="#" className="text-gray-300 hover:text-secondary transition-colors">
                 Facebook
               </a>
-              <a href="#" className="text-gray-300 hover:text-gold-accent transition-colors">
+              <a href="#" className="text-gray-300 hover:text-secondary transition-colors">
                 Instagram
               </a>
-              <a href="#" className="text-gray-300 hover:text-gold-accent transition-colors">
+              <a href="#" className="text-gray-300 hover:text-secondary transition-colors">
                 Twitter
               </a>
             </div>
@@ -87,9 +87,9 @@ const Footer: React.FC = () => {
               <input
                 type="email"
                 placeholder="Email"
-                className={`flex-1 px-3 py-2 bg-gray-800 border border-gray-700 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-egyptian-blue ${isRTL ? 'rounded-l-none rounded-r-lg' : ''}`}
+                className={`flex-1 px-3 py-2 bg-gray-800 border border-gray-700 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-primary ${isRTL ? 'rounded-l-none rounded-r-lg' : ''}`}
               />
-              <button className={`px-4 py-2 bg-egyptian-blue text-white rounded-r-lg hover:bg-blue-700 transition-colors ${isRTL ? 'rounded-r-none rounded-l-lg' : ''}`}>
+              <button className={`px-4 py-2 bg-primary text-white rounded-r-lg hover:bg-blue-700 transition-colors ${isRTL ? 'rounded-r-none rounded-l-lg' : ''}`}>
                 Subscribe
               </button>
             </div>

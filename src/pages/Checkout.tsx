@@ -84,7 +84,7 @@ const Checkout: React.FC = () => {
         <p className="text-[var(--secondary-text-color)] mb-8">Add some products to continue with checkout</p>
         <button
           onClick={() => navigate('/shop')}
-          className="bg-[var(--primary-color)] text-[var(--cream-white-500)] px-6 py-3 rounded-lg hover:bg-[var(--egyptian-blue-800)] transition-colors"
+          className="bg-[var(--primary-color)] text-[var(--cream-white-500)] px-6 py-3 rounded-lg hover:bg-[var(--primary-800)] transition-colors"
         >
           Continue Shopping
         </button>
@@ -246,7 +246,7 @@ const Checkout: React.FC = () => {
 
                 <button
                   type="submit"
-                  className="w-full bg-[var(--primary-color)] text-[var(--cream-white-500)] py-3 px-6 rounded-lg hover:bg-[var(--egyptian-blue-800)] transition-colors mt-6"
+                  className="w-full bg-[var(--primary-color)] text-[var(--cream-white-500)] py-3 px-6 rounded-lg hover:bg-[var(--primary-800)] transition-colors mt-6"
                 >
                   Continue to Payment
                 </button>
@@ -387,7 +387,7 @@ const Checkout: React.FC = () => {
 
                   <button
                     type="submit"
-                    className="w-full bg-[var(--primary-color)] text-[var(--cream-white-500)] py-3 px-6 rounded-lg hover:bg-[var(--egyptian-blue-800)] transition-colors mt-6"
+                    className="w-full bg-[var(--primary-color)] text-[var(--cream-white-500)] py-3 px-6 rounded-lg hover:bg-[var(--primary-800)] transition-colors mt-6"
                   >
                     Review Order
                   </button>
@@ -397,7 +397,7 @@ const Checkout: React.FC = () => {
               {paymentMethod !== 'card' && (
                 <button
                   onClick={() => setStep(3)}
-                  className="w-full bg-[var(--primary-color)] text-[var(--cream-white-500)] py-3 px-6 rounded-lg hover:bg-[var(--egyptian-blue-800)] transition-colors"
+                  className="w-full bg-[var(--primary-color)] text-[var(--cream-white-500)] py-3 px-6 rounded-lg hover:bg-[var(--primary-800)] transition-colors"
                 >
                   Review Order
                 </button>
@@ -468,7 +468,7 @@ const Checkout: React.FC = () => {
               <div className="flex space-x-4">
                 <button
                   onClick={handleOrderSubmit}
-                  className="flex-1 bg-[var(--primary-color)] text-[var(--cream-white-500)] py-3 px-6 rounded-lg hover:bg-[var(--egyptian-blue-800)] transition-colors"
+                  className="flex-1 bg-[var(--primary-color)] text-[var(--cream-white-500)] py-3 px-6 rounded-lg hover:bg-[var(--primary-800)] transition-colors"
                 >
                   Place Order
                 </button>

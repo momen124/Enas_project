@@ -79,7 +79,7 @@ export default function CategorySection() {
                         loading="lazy"
                       />
                     </div>
-                    <h3 className="text-lg font-medium text-[var(--text-color)] group-hover:text-[var(--gold-accent-500)] transition-colors">
+                    <h3 className="text-lg font-medium text-[var(--text-color)] group-hover:text-[var(--secondary-500)] transition-colors">
                       {category.name}
                     </h3>
                   </div>

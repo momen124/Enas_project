@@ -18,7 +18,7 @@ const Hero: React.FC = () => {
     <section
       className="relative py-24 overflow-hidden"
       style={{
-        background: 'linear-gradient(to bottom right, var(--egyptian-blue-800), var(--deep-navy-500))',
+        background: 'linear-gradient(to bottom right, var(--primary-800), var(--deep-navy-500))',
       }}
     >
       <div className="absolute inset-0 opacity-20 mix-blend-overlay">

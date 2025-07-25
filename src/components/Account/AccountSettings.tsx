@@ -216,7 +216,7 @@ const AccountSettings: React.FC = () => {
             </div>
             <button
               onClick={() => setShowPasswordForm(!showPasswordForm)}
-              className="text-[var(--primary-color)] hover:text-[var(--egyptian-blue-800)] transition-colors"
+              className="text-[var(--primary-color)] hover:text-[var(--primary-800)] transition-colors"
             >
               Change Password
             </button>
@@ -267,7 +267,7 @@ const AccountSettings: React.FC = () => {
               <div className="flex space-x-4">
                 <button
                   type="submit"
-                  className="bg-[var(--primary-color)] text-[var(--cream-white-500)] px-4 py-2 rounded-lg hover:bg-[var(--egyptian-blue-800)] transition-colors"
+                  className="bg-[var(--primary-color)] text-[var(--cream-white-500)] px-4 py-2 rounded-lg hover:bg-[var(--primary-800)] transition-colors"
                 >
                   Update Password
                 </button>
@@ -287,7 +287,7 @@ const AccountSettings: React.FC = () => {
               <h4 className="font-medium text-[var(--text-color)]">Two-Factor Authentication</h4>
               <p className="text-sm text-[var(--secondary-text-color)]">Add an extra layer of security to your account</p>
             </div>
-            <button className="text-[var(--primary-color)] hover:text-[var(--egyptian-blue-800)] transition-colors">
+            <button className="text-[var(--primary-color)] hover:text-[var(--primary-800)] transition-colors">
               Enable 2FA
             </button>
           </div>
@@ -304,7 +304,7 @@ const AccountSettings: React.FC = () => {
               <h4 className="font-medium text-[var(--text-color)]">Export Data</h4>
               <p className="text-sm text-[var(--secondary-text-color)]">Download a copy of your account data</p>
             </div>
-            <button className="text-[var(--primary-color)] hover:text-[var(--egyptian-blue-800)] transition-colors">
+            <button className="text-[var(--primary-color)] hover:text-[var(--primary-800)] transition-colors">
               Download Data
             </button>
           </div>

@@ -106,12 +106,12 @@ const Search: React.FC = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={isRTL ? 'ابحث عن المنتجات...' : 'Search for products...'}
-              className={`w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-egyptian-blue-500 text-lg ${isRTL ? 'pr-12' : 'pl-12'}`}
+              className={`w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 text-lg ${isRTL ? 'pr-12' : 'pl-12'}`}
             />
             <MagnifyingGlassIcon className={`absolute top-3.5 w-6 h-6 text-gray-400 ${isRTL ? 'right-3' : 'left-3'}`} />
             <button
               type="submit"
-              className={`absolute top-2 bottom-2 px-6 bg-egyptian-blue-600 text-white rounded-lg hover:bg-egyptian-blue-700 transition-colors ${isRTL ? 'left-2' : 'right-2'}`}
+              className={`absolute top-2 bottom-2 px-6 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors ${isRTL ? 'left-2' : 'right-2'}`}
             >
               Search
             </button>
@@ -136,7 +136,7 @@ const Search: React.FC = () => {
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="border-gray-300 rounded-lg text-sm focus:ring-egyptian-blue-500 focus:border-egyptian-blue-500"
+                  className="border-gray-300 rounded-lg text-sm focus:ring-primary-500 focus:border-primary-500"
                 >
                   <option value="relevance">Relevance</option>
                   <option value="newest">Newest</option>
@@ -181,7 +181,7 @@ const Search: React.FC = () => {
                     setSearchQuery(term);
                     setSearchParams({ q: term });
                   }}
-                  className="bg-gray-100 hover:bg-egyptian-blue-100 hover:text-egyptian-blue-700 px-4 py-2 rounded-full text-sm transition-colors"
+                  className="bg-gray-100 hover:bg-primary-100 hover:text-primary-700 px-4 py-2 rounded-full text-sm transition-colors"
                 >
                   {term}
                 </button>

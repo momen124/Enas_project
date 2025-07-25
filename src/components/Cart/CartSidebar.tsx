@@ -74,7 +74,7 @@ const CartSidebar: React.FC = () => {
                             <Link
                               to="/shop"
                               onClick={() => setCartOpen(false)}
-                              className="inline-block bg-[var(--primary-color)] text-[var(--cream-white-500)] px-6 py-2 rounded-lg hover:bg-[var(--egyptian-blue-800)] transition-colors"
+                              className="inline-block bg-[var(--primary-color)] text-[var(--cream-white-500)] px-6 py-2 rounded-lg hover:bg-[var(--primary-800)] transition-colors"
                             >
                               {t('continueShopping')}
                             </Link>
@@ -171,7 +171,7 @@ const CartSidebar: React.FC = () => {
                           <Link
                             to="/checkout"
                             onClick={() => setCartOpen(false)}
-                            className="flex items-center justify-center rounded-md border border-transparent bg-[var(--primary-color)] text-[var(--cream-white-500)] px-6 py-3 text-base font-medium shadow-sm hover:bg-[var(--egyptian-blue-800)] transition-colors w-full"
+                            className="flex items-center justify-center rounded-md border border-transparent bg-[var(--primary-color)] text-[var(--cream-white-500)] px-6 py-3 text-base font-medium shadow-sm hover:bg-[var(--primary-800)] transition-colors w-full"
                           >
                             {t('checkout')}
                           </Link>
@@ -181,7 +181,7 @@ const CartSidebar: React.FC = () => {
                             or{' '}
                             <button
                               type="button"
-                              className="font-medium text-[var(--primary-color)] hover:text-[var(--egyptian-blue-800)]"
+                              className="font-medium text-[var(--primary-color)] hover:text-[var(--primary-800)]"
                               onClick={() => setCartOpen(false)}
                             >
                               {t('continueShopping')}
