@@ -11,18 +11,18 @@ const FeaturedSections: React.FC = () => {
   const { language } = useStore();
   const isRTL = language === 'ar';
 
-  const newArrivals = products.filter(p => p.newArrival).slice(0, 4);
-  const bestSellers = products.filter(p => p.bestseller).slice(0, 4);
-  const featured = products.filter(p => p.featured).slice(0, 4);
+  const newArrivals = products.filter((p) => p.newArrival).slice(0, 4);
+  const bestSellers = products.filter((p) => p.bestseller).slice(0, 4);
+  const featured = products.filter((p) => p.featured).slice(0, 4);
 
   const Section = ({ title, products, viewAllLink }: any) => (
     <section className="py-16">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between mb-8">
-          <h2 className="text-3xl font-bold text-gray-900">{title}</h2>
+          <h2 className="text-3xl font-bold text-[var(--text-color)]">{title}</h2>
           <Link
             to={viewAllLink}
-            className={`flex items-center text-egyptian-blue hover:text-blue-700 transition-colors ${isRTL ? 'space-x-reverse' : ''} space-x-1`}
+            className={`flex items-center text-[var(--primary-color)] hover:text-[var(--hover-bg-color)] transition-colors ${isRTL ? 'space-x-reverse' : ''} space-x-1`}
           >
             <span>View All</span>
             <ChevronRightIcon className={`w-4 h-4 ${isRTL ? 'rotate-180' : ''}`} />
@@ -38,26 +38,12 @@ const FeaturedSections: React.FC = () => {
   );
 
   return (
-    <div className="bg-white">
-      <Section 
-        title={t('newArrivals')} 
-        products={newArrivals} 
-        viewAllLink="/shop?filter=new" 
-      />
-      
-      <div className="bg-gray-50">
-        <Section 
-          title={t('bestSellers')} 
-          products={bestSellers} 
-          viewAllLink="/shop?filter=bestseller" 
-        />
+    <div className="bg-[var(--background-color)]">
+      <Section title={t('newArrivals')} products={newArrivals} viewAllLink="/shop?filter=new" />
+      <div className="bg-[var(--card-bg-color)]">
+        <Section title={t('bestSellers')} products={bestSellers} viewAllLink="/shop?filter=bestseller" />
       </div>
-      
-      <Section 
-        title={t('myCuteBsbs')} 
-        products={featured} 
-        viewAllLink="/shop?filter=featured" 
-      />
+      <Section title={t('myCuteBsbs')} products={featured} viewAllLink="/shop?filter=featured" />
     </div>
   );
 };

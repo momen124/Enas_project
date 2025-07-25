@@ -18,18 +18,18 @@ export default function CategorySection() {
   };
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-[var(--card-bg-color)]">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-light text-gray-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-light text-[var(--text-color)] mb-4">
             Explore each unique collection
           </h2>
-          <div className="w-16 h-0.5 bg-[#4A9B8E] mx-auto"></div>
+          <div className="w-16 h-0.5 bg-[var(--primary-color)] mx-auto"></div>
         </div>
 
         <div className="relative">
           <Button
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md hover:bg-gray-50"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-[var(--card-bg-color)] shadow-md hover:bg-[var(--hover-bg-color)]"
             onClick={() => scroll("left")}
           >
             <ChevronLeftIcon className="h-5 w-5" />
@@ -47,14 +47,14 @@ export default function CategorySection() {
                 className="flex-shrink-0 group"
               >
                 <div className="w-48 text-center">
-                  <div className="relative w-48 h-48 rounded-full overflow-hidden mb-4 bg-[#F5F1E8] group-hover:scale-105 transition-transform duration-300">
+                  <div className="relative w-48 h-48 rounded-full overflow-hidden mb-4 bg-[var(--sand-beige-50)] group-hover:scale-105 transition-transform duration-300">
                     <img
                       src={category.image || "/placeholder.svg"}
                       alt={category.name}
                       className="object-cover p-8 w-full h-full"
                     />
                   </div>
-                  <h3 className="text-lg font-medium text-gray-900 group-hover:text-[#D4A574] transition-colors">
+                  <h3 className="text-lg font-medium text-[var(--text-color)] group-hover:text-[var(--gold-accent-500)] transition-colors">
                     {category.name}
                   </h3>
                 </div>
@@ -63,7 +63,7 @@ export default function CategorySection() {
           </div>
 
           <Button
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md hover:bg-gray-50"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-[var(--card-bg-color)] shadow-md hover:bg-[var(--hover-bg-color)]"
             onClick={() => scroll("right")}
           >
             <ChevronRightIcon className="h-5 w-5" />

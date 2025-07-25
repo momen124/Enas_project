@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'; // Added useState
+import React, { useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
@@ -28,7 +28,7 @@ const MemoizedMegaMenu = React.memo(MegaMenu);
 
 const Header: React.FC = () => {
   const { t, i18n } = useTranslation();
-  const { cart, setCartOpen, language, setLanguage, currency, setCurrency } = useStore(); // Removed unused cartOpen
+  const { cart, setCartOpen, language, setLanguage, currency, setCurrency } = useStore();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [expandedCategories, setExpandedCategories] = useState<string[]>([]);
@@ -48,9 +48,9 @@ const Header: React.FC = () => {
     setSearchQuery(e.target.value);
   }, []);
 
-  const toggleCategory = (categoryId: string) => { // Typed categoryId as string
-    setExpandedCategories(prev => // Typed prev as string[]
-      prev.includes(categoryId) ? prev.filter(id => id !== categoryId) : [...prev, categoryId]
+  const toggleCategory = (categoryId: string) => {
+    setExpandedCategories((prev) =>
+      prev.includes(categoryId) ? prev.filter((id) => id !== categoryId) : [...prev, categoryId]
     );
   };
 
@@ -62,9 +62,9 @@ const Header: React.FC = () => {
 
   return (
     <>
-      <header className="bg-white shadow-sm relative z-50">
+      <header className="bg-[var(--background-color)] shadow-[0_1px_3px_var(--shadow-color)] relative z-50">
         {/* Top Bar */}
-        <div className="bg-egyptian-blue text-white py-2">
+        <div className="bg-[var(--primary-color)] text-[var(--cream-white-500)] py-2">
           <div className="max-w-7xl mx-auto px-4 flex justify-between items-center text-sm">
             <div className={`flex items-center space-x-4 ${isRTL ? 'space-x-reverse' : ''}`}>
               <span>{t('promotionalBanner')}</span>
@@ -72,7 +72,7 @@ const Header: React.FC = () => {
             <div className={`flex items-center space-x-4 ${isRTL ? 'space-x-reverse' : ''}`}>
               <button
                 onClick={toggleLanguage}
-                className="hover:text-gold-accent transition-colors"
+                className="hover:text-[var(--gold-accent-500)] transition-colors"
                 aria-label={t('toggleLanguage', { lang: language === 'en' ? 'Arabic' : 'English' })}
                 aria-pressed={language === 'en' ? 'false' : 'true'}
               >
@@ -82,11 +82,11 @@ const Header: React.FC = () => {
               <select
                 value={currency}
                 onChange={(e) => setCurrency(e.target.value as CurrencyCode)}
-                className="bg-transparent border-none text-white focus:outline-none cursor-pointer"
+                className="bg-transparent border-none text-[var(--cream-white-500)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] cursor-pointer"
                 aria-label={t('selectCurrency')}
               >
-                {currencies.map(curr => (
-                  <option key={curr.code} value={curr.code} className="text-gray-900">
+                {currencies.map((curr) => (
+                  <option key={curr.code} value={curr.code} className="text-[var(--text-color)]">
                     {curr.code} ({curr.symbol})
                   </option>
                 ))}
@@ -101,36 +101,38 @@ const Header: React.FC = () => {
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-2" title={t('home')}>
               <img src={Logo} alt="Joud logo" className="h-20 w-auto" />
-              <span className="text-2xl font-bold text-egyptian-blue"> cmona </span>
+              <span className="text-2xl font-bold text-[var(--primary-color)]">cmona</span>
             </Link>
 
             {/* Search Bar - Desktop */}
             <div className="hidden md:flex flex-1 max-w-md mx-8">
               <div className="relative w-full">
-                <label htmlFor="desktop-search" className="sr-only">{t('search')}</label>
+                <label htmlFor="desktop-search" className="sr-only">
+                  {t('search')}
+                </label>
                 <input
                   id="desktop-search"
                   type="text"
                   placeholder={t('search')}
                   value={searchQuery}
                   onChange={handleSearchChange}
-                  className={`w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-egyptian-blue ${isRTL ? 'pe-10' : 'ps-10'}`}
+                  className={`w-full px-4 py-2 border border-[var(--border-color)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] ${isRTL ? 'pe-10' : 'ps-10'}`}
                 />
-                <MagnifyingGlassIcon className={`absolute top-2.5 w-5 h-5 text-gray-400 ${isRTL ? 'right-3' : 'left-3'}`} />
+                <MagnifyingGlassIcon className={`absolute top-2.5 w-5 h-5 text-[var(--secondary-text-color)] ${isRTL ? 'right-3' : 'left-3'}`} />
               </div>
             </div>
 
             {/* Actions */}
             <div className={`flex items-center space-x-4 ${isRTL ? 'space-x-reverse' : ''}`}>
-              <Link to="/account" className="p-2 hover:text-egyptian-blue transition-colors" aria-label={t('account')}>
+              <Link to="/account" className="p-2 hover:text-[var(--primary-color)] transition-colors" aria-label={t('account')}>
                 <UserIcon className="w-6 h-6" />
               </Link>
-              <Link to="/wishlist" className="p-2 hover:text-egyptian-blue transition-colors" aria-label={t('wishlist')}>
+              <Link to="/wishlist" className="p-2 hover:text-[var(--primary-color)] transition-colors" aria-label={t('wishlist')}>
                 <HeartIcon className="w-6 h-6" />
               </Link>
               <button
                 onClick={() => setCartOpen(true)}
-                className="p-2 hover:text-egyptian-blue transition-colors relative"
+                className="p-2 hover:text-[var(--primary-color)] transition-colors relative"
                 aria-label={t('openCart', { count: cartItemsCount })}
               >
                 <ShoppingBagIcon className="w-6 h-6" />
@@ -152,7 +154,7 @@ const Header: React.FC = () => {
         </div>
 
         {/* Navigation */}
-        <nav className="border-t border-gray-200 hidden md:block" aria-label={t('mainNavigation')}>
+        <nav className="border-t border-[var(--border-color)] hidden md:block" aria-label={t('mainNavigation')}>
           <div className="max-w-7xl mx-auto px-4">
             <div className="flex items-center justify-center space-x-8">
               {categories.map((category) => (
@@ -164,16 +166,12 @@ const Header: React.FC = () => {
                 >
                   <Link
                     to={`/category/${category.slug}`}
-                    className={`flex items-center py-4 px-2 text-gray-700 hover:text-egyptian-blue transition-colors ${isRTL ? 'space-x-reverse' : ''} space-x-1`}
+                    className={`flex items-center py-4 px-2 text-[var(--text-color)] hover:text-[var(--primary-color)] transition-colors ${isRTL ? 'space-x-reverse' : ''} space-x-1`}
                   >
                     <span>{isRTL ? category.nameAr : category.name}</span>
-                    {category.children && (
-                      <ChevronDownIcon className={`w-4 h-4 ${isRTL ? 'rotate-180' : ''}`} />
-                    )}
+                    {category.children && <ChevronDownIcon className={`w-4 h-4 ${isRTL ? 'rotate-180' : ''}`} />}
                   </Link>
-                  {activeCategoryId === category.id && category.children && (
-                    <MemoizedMegaMenu category={category} />
-                  )}
+                  {activeCategoryId === category.id && category.children && <MemoizedMegaMenu category={category} />}
                 </div>
               ))}
             </div>
@@ -182,20 +180,22 @@ const Header: React.FC = () => {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-white border-t border-gray-200">
+          <div className="md:hidden bg-[var(--card-bg-color)] border-t border-[var(--border-color)]">
             {/* Mobile Search */}
             <div className="p-4">
               <div className="relative">
-                <label htmlFor="mobile-search" className="sr-only">{t('search')}</label>
+                <label htmlFor="mobile-search" className="sr-only">
+                  {t('search')}
+                </label>
                 <input
                   id="mobile-search"
                   type="text"
                   placeholder={t('search')}
                   value={searchQuery}
                   onChange={handleSearchChange}
-                  className={`w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-egyptian-blue ${isRTL ? 'pe-10' : 'ps-10'}`}
+                  className={`w-full px-4 py-2 border border-[var(--border-color)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] ${isRTL ? 'pe-10' : 'ps-10'}`}
                 />
-                <MagnifyingGlassIcon className={`absolute top-2.5 w-5 h-5 text-gray-400 ${isRTL ? 'right-3' : 'left-3'}`} />
+                <MagnifyingGlassIcon className={`absolute top-2.5 w-5 h-5 text-[var(--secondary-text-color)] ${isRTL ? 'right-3' : 'left-3'}`} />
               </div>
             </div>
 
@@ -205,7 +205,7 @@ const Header: React.FC = () => {
                 <div key={category.id}>
                   <button
                     onClick={() => toggleCategory(category.id)}
-                    className="w-full flex justify-between px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-egyptian-blue transition-colors"
+                    className="w-full flex justify-between px-4 py-3 text-[var(--text-color)] hover:bg-[var(--hover-bg-color)] hover:text-[var(--primary-color)] transition-colors"
                   >
                     <span>{isRTL ? category.nameAr : category.name}</span>
                     {category.children && (
@@ -220,7 +220,7 @@ const Header: React.FC = () => {
                         <Link
                           key={subCategory.id}
                           to={`/category/${subCategory.slug}`}
-                          className="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-egyptian-blue"
+                          className="block px-4 py-2 text-[var(--secondary-text-color)] hover:bg-[var(--hover-bg-color)] hover:text-[var(--primary-color)]"
                           onClick={() => setMobileMenuOpen(false)}
                         >
                           {isRTL ? subCategory.nameAr : subCategory.name}

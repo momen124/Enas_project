@@ -88,30 +88,30 @@ const AccountOrders: React.FC = () => {
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'delivered':
-        return <CheckCircleIcon className="w-5 h-5 text-green-600" />;
+        return <CheckCircleIcon className="w-5 h-5 text-green-600 dark:text-green-400" />;
       case 'shipped':
-        return <TruckIcon className="w-5 h-5 text-blue-600" />;
+        return <TruckIcon className="w-5 h-5 text-[var(--primary-color)]" />;
       case 'processing':
-        return <ClockIcon className="w-5 h-5 text-yellow-600" />;
+        return <ClockIcon className="w-5 h-5 text-yellow-600 dark:text-yellow-400" />;
       case 'cancelled':
-        return <XCircleIcon className="w-5 h-5 text-red-600" />;
+        return <XCircleIcon className="w-5 h-5 text-red-600 dark:text-red-400" />;
       default:
-        return <ClockIcon className="w-5 h-5 text-gray-600" />;
+        return <ClockIcon className="w-5 h-5 text-[var(--secondary-text-color)]" />;
     }
   };
 
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'delivered':
-        return 'text-green-600 bg-green-50';
+        return 'text-green-600 bg-green-50 dark:text-green-400 dark:bg-green-900/20';
       case 'shipped':
-        return 'text-blue-600 bg-blue-50';
+        return 'text-[var(--primary-color)] bg-[var(--hover-bg-color)]';
       case 'processing':
-        return 'text-yellow-600 bg-yellow-50';
+        return 'text-yellow-600 bg-yellow-50 dark:text-yellow-400 dark:bg-yellow-900/20';
       case 'cancelled':
-        return 'text-red-600 bg-red-50';
+        return 'text-red-600 bg-red-50 dark:text-red-400 dark:bg-red-900/20';
       default:
-        return 'text-gray-600 bg-gray-50';
+        return 'text-[var(--secondary-text-color)] bg-[var(--hover-bg-color)]';
     }
   };
 
@@ -122,17 +122,17 @@ const AccountOrders: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="bg-white rounded-lg shadow-sm border p-6">
+      <div className="bg-[var(--card-bg-color)] rounded-lg shadow-sm border border-[var(--border-color)] p-6">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-          <h2 className="text-xl font-semibold mb-4 sm:mb-0">Order History</h2>
+          <h2 className="text-xl font-semibold text-[var(--text-color)] mb-4 sm:mb-0">Order History</h2>
           
           {/* Filter Dropdown */}
           <div className="flex items-center space-x-4">
-            <label className="text-sm text-gray-600">Filter by status:</label>
+            <label className="text-sm text-[var(--secondary-text-color)]">Filter by status:</label>
             <select
               value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value)}
-              className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-egyptian-blue-500"
+              className="border border-[var(--border-color)] rounded-lg px-3 py-2 text-sm bg-[var(--card-bg-color)] text-[var(--text-color)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]"
             >
               <option value="all">All Orders</option>
               <option value="processing">Processing</option>
@@ -146,19 +146,19 @@ const AccountOrders: React.FC = () => {
 
       {/* Orders List */}
       {filteredOrders.length === 0 ? (
-        <div className="bg-white rounded-lg shadow-sm border p-12 text-center">
-          <div className="text-gray-400 mb-4">
+        <div className="bg-[var(--card-bg-color)] rounded-lg shadow-sm border border-[var(--border-color)] p-12 text-center">
+          <div className="text-[var(--secondary-text-color)] mb-4">
             <ClockIcon className="w-16 h-16 mx-auto" />
           </div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">No orders found</h3>
-          <p className="text-gray-600 mb-6">
+          <h3 className="text-lg font-semibold text-[var(--text-color)] mb-2">No orders found</h3>
+          <p className="text-[var(--secondary-text-color)] mb-6">
             {filterStatus === 'all' 
               ? "You haven't placed any orders yet." 
               : `No orders with status "${filterStatus}" found.`}
           </p>
           <Link
             to="/shop"
-            className="bg-egyptian-blue-600 text-white px-6 py-3 rounded-lg hover:bg-egyptian-blue-700 transition-colors inline-block"
+            className="bg-[var(--primary-color)] text-[var(--cream-white-500)] px-6 py-3 rounded-lg hover:bg-[var(--egyptian-blue-800)] transition-colors inline-block"
           >
             Start Shopping
           </Link>
@@ -166,14 +166,14 @@ const AccountOrders: React.FC = () => {
       ) : (
         <div className="space-y-4">
           {filteredOrders.map((order) => (
-            <div key={order.id} className="bg-white rounded-lg shadow-sm border">
+            <div key={order.id} className="bg-[var(--card-bg-color)] rounded-lg shadow-sm border border-[var(--border-color)]">
               {/* Order Header */}
-              <div className="p-6 border-b border-gray-100">
+              <div className="p-6 border-b border-[var(--border-color)]">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
                   <div className="flex items-center space-x-4 mb-4 sm:mb-0">
                     <div>
-                      <h3 className="font-semibold text-gray-900">Order #{order.id}</h3>
-                      <p className="text-sm text-gray-600">
+                      <h3 className="font-semibold text-[var(--text-color)]">Order #{order.id}</h3>
+                      <p className="text-sm text-[var(--secondary-text-color)]">
                         Placed on {new Date(order.date).toLocaleDateString()}
                       </p>
                     </div>
@@ -185,10 +185,10 @@ const AccountOrders: React.FC = () => {
                   
                   <div className="flex items-center space-x-4">
                     <div className="text-right">
-                      <p className="font-semibold text-gray-900">{formatPrice(order.total)}</p>
-                      <p className="text-sm text-gray-600">{order.items.length} item(s)</p>
+                      <p className="font-semibold text-[var(--text-color)]">{formatPrice(order.total)}</p>
+                      <p className="text-sm text-[var(--secondary-text-color)]">{order.items.length} item(s)</p>
                     </div>
-                    <button className="flex items-center space-x-2 text-egyptian-blue-600 hover:text-egyptian-blue-700 transition-colors">
+                    <button className="flex items-center space-x-2 text-[var(--primary-color)] hover:text-[var(--egyptian-blue-800)] transition-colors">
                       <EyeIcon className="w-4 h-4" />
                       <span>View Details</span>
                     </button>
@@ -207,15 +207,15 @@ const AccountOrders: React.FC = () => {
                         className="w-16 h-16 object-cover rounded-lg"
                       />
                       <div className="flex-1">
-                        <h4 className="font-medium text-gray-900">
+                        <h4 className="font-medium text-[var(--text-color)]">
                           {language === 'ar' ? item.nameAr : item.name}
                         </h4>
-                        <p className="text-sm text-gray-600">
+                        <p className="text-sm text-[var(--secondary-text-color)]">
                           {item.color} • {item.size} • Qty: {item.quantity}
                         </p>
                       </div>
                       <div className="text-right">
-                        <p className="font-medium text-gray-900">
+                        <p className="font-medium text-[var(--text-color)]">
                           {formatPrice(item.price * item.quantity)}
                         </p>
                       </div>
@@ -224,25 +224,25 @@ const AccountOrders: React.FC = () => {
                 </div>
 
                 {/* Order Actions */}
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-6 pt-6 border-t border-gray-100">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-6 pt-6 border-t border-[var(--border-color)]">
                   <div className="flex space-x-4 mb-4 sm:mb-0">
                     {order.status === 'delivered' && (
-                      <button className="text-egyptian-blue-600 hover:text-egyptian-blue-700 transition-colors">
+                      <button className="text-[var(--primary-color)] hover:text-[var(--egyptian-blue-800)] transition-colors">
                         Write Review
                       </button>
                     )}
                     {order.status === 'processing' && (
-                      <button className="text-red-600 hover:text-red-700 transition-colors">
+                      <button className="text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 transition-colors">
                         Cancel Order
                       </button>
                     )}
-                    <button className="text-gray-600 hover:text-gray-700 transition-colors">
+                    <button className="text-[var(--secondary-text-color)] hover:text-[var(--text-color)] transition-colors">
                       Download Invoice
                     </button>
                   </div>
                   
                   {(order.status === 'shipped' || order.status === 'delivered') && (
-                    <button className="text-egyptian-blue-600 hover:text-egyptian-blue-700 transition-colors flex items-center space-x-2">
+                    <button className="text-[var(--primary-color)] hover:text-[var(--egyptian-blue-800)] transition-colors flex items-center space-x-2">
                       <TruckIcon className="w-4 h-4" />
                       <span>Track Package</span>
                     </button>

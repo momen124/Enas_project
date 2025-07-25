@@ -65,13 +65,13 @@ const AccountAddresses: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (editingId) {
       // Update existing address
-      setAddresses(prev => prev.map(addr => 
-        addr.id === editingId 
+      setAddresses(prev => prev.map(addr =>
+        addr.id === editingId
           ? { ...formData, id: editingId }
-          : formData.isDefault 
+          : formData.isDefault
             ? { ...addr, isDefault: false }
             : addr
       ));
@@ -82,15 +82,15 @@ const AccountAddresses: React.FC = () => {
         ...formData,
         id: Date.now().toString(),
       };
-      
-      setAddresses(prev => 
-        formData.isDefault 
+
+      setAddresses(prev =>
+        formData.isDefault
           ? [...prev.map(addr => ({ ...addr, isDefault: false })), newAddress]
           : [...prev, newAddress]
       );
       toast.success('Address added successfully');
     }
-    
+
     resetForm();
   };
 
@@ -116,31 +116,31 @@ const AccountAddresses: React.FC = () => {
   };
 
   const getTypeIcon = (type: string) => {
-    return <MapPinIcon className="w-5 h-5" />;
+    return <MapPinIcon className="w-5 h-5 text-[var(--text-color)]" />;
   };
 
   const getTypeColor = (type: string) => {
     switch (type) {
       case 'home':
-        return 'text-blue-600 bg-blue-50';
+        return 'text-[var(--primary-color)] bg-[var(--hover-bg-color)]';
       case 'work':
-        return 'text-green-600 bg-green-50';
+        return 'text-green-600 bg-green-50 dark:text-green-400 dark:bg-green-900/20';
       case 'other':
-        return 'text-purple-600 bg-purple-50';
+        return 'text-purple-600 bg-purple-50 dark:text-purple-400 dark:bg-purple-900/20';
       default:
-        return 'text-gray-600 bg-gray-50';
+        return 'text-[var(--secondary-text-color)] bg-[var(--hover-bg-color)]';
     }
   };
 
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="bg-white rounded-lg shadow-sm border p-6">
+      <div className="bg-[var(--card-bg-color)] rounded-lg shadow-sm border border-[var(--border-color)] p-6">
         <div className="flex items-center justify-between">
-          <h2 className="text-xl font-semibold">Delivery Addresses</h2>
+          <h2 className="text-xl font-semibold text-[var(--text-color)]">Delivery Addresses</h2>
           <button
             onClick={() => setShowForm(true)}
-            className="bg-egyptian-blue-600 text-white px-4 py-2 rounded-lg hover:bg-egyptian-blue-700 transition-colors flex items-center space-x-2"
+            className="bg-[var(--primary-color)] text-[var(--cream-white-500)] px-4 py-2 rounded-lg hover:bg-[var(--egyptian-blue-800)] transition-colors flex items-center space-x-2"
           >
             <PlusIcon className="w-4 h-4" />
             <span>Add New Address</span>
@@ -150,15 +150,15 @@ const AccountAddresses: React.FC = () => {
 
       {/* Address Form */}
       {showForm && (
-        <div className="bg-white rounded-lg shadow-sm border p-6">
-          <h3 className="text-lg font-semibold mb-4">
+        <div className="bg-[var(--card-bg-color)] rounded-lg shadow-sm border border-[var(--border-color)] p-6">
+          <h3 className="text-lg font-semibold text-[var(--text-color)] mb-4">
             {editingId ? 'Edit Address' : 'Add New Address'}
           </h3>
-          
+
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Address Type */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-[var(--text-color)] mb-2">
                 Address Type
               </label>
               <div className="flex space-x-4">
@@ -170,9 +170,9 @@ const AccountAddresses: React.FC = () => {
                       value={type}
                       checked={formData.type === type}
                       onChange={(e) => setFormData(prev => ({ ...prev, type: e.target.value as any }))}
-                      className="text-egyptian-blue-600 focus:ring-egyptian-blue-500"
+                      className="text-[var(--primary-color)] focus:ring-[var(--primary-color)]"
                     />
-                    <span className="ml-2 capitalize">{type}</span>
+                    <span className="ml-2 capitalize text-[var(--text-color)]">{type}</span>
                   </label>
                 ))}
               </div>
@@ -181,7 +181,7 @@ const AccountAddresses: React.FC = () => {
             {/* Name Fields */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-[var(--text-color)] mb-1">
                   First Name *
                 </label>
                 <input
@@ -189,11 +189,11 @@ const AccountAddresses: React.FC = () => {
                   required
                   value={formData.firstName}
                   onChange={(e) => setFormData(prev => ({ ...prev, firstName: e.target.value }))}
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-egyptian-blue-500"
+                  className="w-full border border-[var(--border-color)] rounded-lg px-3 py-2 bg-[var(--card-bg-color)] text-[var(--text-color)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-[var(--text-color)] mb-1">
                   Last Name *
                 </label>
                 <input
@@ -201,14 +201,14 @@ const AccountAddresses: React.FC = () => {
                   required
                   value={formData.lastName}
                   onChange={(e) => setFormData(prev => ({ ...prev, lastName: e.target.value }))}
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-egyptian-blue-500"
+                  className="w-full border border-[var(--border-color)] rounded-lg px-3 py-2 bg-[var(--card-bg-color)] text-[var(--text-color)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]"
                 />
               </div>
             </div>
 
             {/* Address Fields */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-[var(--text-color)] mb-1">
                 Street Address *
               </label>
               <input
@@ -216,13 +216,13 @@ const AccountAddresses: React.FC = () => {
                 required
                 value={formData.street}
                 onChange={(e) => setFormData(prev => ({ ...prev, street: e.target.value }))}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-egyptian-blue-500"
+                className="w-full border border-[var(--border-color)] rounded-lg px-3 py-2 bg-[var(--card-bg-color)] text-[var(--text-color)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]"
               />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-[var(--text-color)] mb-1">
                   City *
                 </label>
                 <input
@@ -230,18 +230,18 @@ const AccountAddresses: React.FC = () => {
                   required
                   value={formData.city}
                   onChange={(e) => setFormData(prev => ({ ...prev, city: e.target.value }))}
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-egyptian-blue-500"
+                  className="w-full border border-[var(--border-color)] rounded-lg px-3 py-2 bg-[var(--card-bg-color)] text-[var(--text-color)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-[var(--text-color)] mb-1">
                   Governorate *
                 </label>
                 <select
                   required
                   value={formData.governorate}
                   onChange={(e) => setFormData(prev => ({ ...prev, governorate: e.target.value }))}
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-egyptian-blue-500"
+                  className="w-full border border-[var(--border-color)] rounded-lg px-3 py-2 bg-[var(--card-bg-color)] text-[var(--text-color)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]"
                 >
                   <option value="">Select Governorate</option>
                   <option value="cairo">Cairo</option>
@@ -252,20 +252,20 @@ const AccountAddresses: React.FC = () => {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-[var(--text-color)] mb-1">
                   Postal Code
                 </label>
                 <input
                   type="text"
                   value={formData.postalCode}
                   onChange={(e) => setFormData(prev => ({ ...prev, postalCode: e.target.value }))}
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-egyptian-blue-500"
+                  className="w-full border border-[var(--border-color)] rounded-lg px-3 py-2 bg-[var(--card-bg-color)] text-[var(--text-color)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-[var(--text-color)] mb-1">
                 Phone Number *
               </label>
               <input
@@ -273,7 +273,7 @@ const AccountAddresses: React.FC = () => {
                 required
                 value={formData.phone}
                 onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-egyptian-blue-500"
+                className="w-full border border-[var(--border-color)] rounded-lg px-3 py-2 bg-[var(--card-bg-color)] text-[var(--text-color)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]"
               />
             </div>
 
@@ -284,9 +284,9 @@ const AccountAddresses: React.FC = () => {
                   type="checkbox"
                   checked={formData.isDefault}
                   onChange={(e) => setFormData(prev => ({ ...prev, isDefault: e.target.checked }))}
-                  className="rounded border-gray-300 text-egyptian-blue-600 focus:ring-egyptian-blue-500"
+                  className="rounded border-[var(--border-color)] text-[var(--primary-color)] focus:ring-[var(--primary-color)]"
                 />
-                <span className="ml-2 text-sm text-gray-700">Set as default address</span>
+                <span className="ml-2 text-sm text-[var(--text-color)]">Set as default address</span>
               </label>
             </div>
 
@@ -294,14 +294,14 @@ const AccountAddresses: React.FC = () => {
             <div className="flex space-x-4 pt-4">
               <button
                 type="submit"
-                className="bg-egyptian-blue-600 text-white px-6 py-2 rounded-lg hover:bg-egyptian-blue-700 transition-colors"
+                className="bg-[var(--primary-color)] text-[var(--cream-white-500)] px-6 py-2 rounded-lg hover:bg-[var(--egyptian-blue-800)] transition-colors"
               >
                 {editingId ? 'Update Address' : 'Add Address'}
               </button>
               <button
                 type="button"
                 onClick={resetForm}
-                className="border border-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-50 transition-colors"
+                className="border border-[var(--border-color)] text-[var(--text-color)] px-6 py-2 rounded-lg hover:bg-[var(--hover-bg-color)] transition-colors"
               >
                 Cancel
               </button>
@@ -313,7 +313,7 @@ const AccountAddresses: React.FC = () => {
       {/* Addresses List */}
       <div className="space-y-4">
         {addresses.map((address) => (
-          <div key={address.id} className="bg-white rounded-lg shadow-sm border p-6">
+          <div key={address.id} className="bg-[var(--card-bg-color)] rounded-lg shadow-sm border border-[var(--border-color)] p-6">
             <div className="flex items-start justify-between">
               <div className="flex-1">
                 <div className="flex items-center space-x-3 mb-3">
@@ -322,42 +322,42 @@ const AccountAddresses: React.FC = () => {
                     <span className="capitalize">{address.type}</span>
                   </div>
                   {address.isDefault && (
-                    <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-medium">
+                    <span className="bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400 text-xs px-2 py-1 rounded-full font-medium">
                       Default
                     </span>
                   )}
                 </div>
-                
+
                 <div className="space-y-1">
-                  <p className="font-medium text-gray-900">
+                  <p className="font-medium text-[var(--text-color)]">
                     {address.firstName} {address.lastName}
                   </p>
-                  <p className="text-gray-600">{address.street}</p>
-                  <p className="text-gray-600">
+                  <p className="text-[var(--secondary-text-color)]">{address.street}</p>
+                  <p className="text-[var(--secondary-text-color)]">
                     {address.city}, {address.governorate} {address.postalCode}
                   </p>
-                  <p className="text-gray-600">{address.phone}</p>
+                  <p className="text-[var(--secondary-text-color)]">{address.phone}</p>
                 </div>
               </div>
-              
+
               <div className="flex items-center space-x-2">
                 {!address.isDefault && (
                   <button
                     onClick={() => handleSetDefault(address.id)}
-                    className="text-sm text-egyptian-blue-600 hover:text-egyptian-blue-700 transition-colors"
+                    className="text-sm text-[var(--primary-color)] hover:text-[var(--egyptian-blue-800)] transition-colors"
                   >
                     Set Default
                   </button>
                 )}
                 <button
                   onClick={() => handleEdit(address)}
-                  className="p-2 text-gray-600 hover:text-egyptian-blue-600 transition-colors"
+                  className="p-2 text-[var(--secondary-text-color)] hover:text-[var(--primary-color)] transition-colors"
                 >
                   <PencilIcon className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => handleDelete(address.id)}
-                  className="p-2 text-gray-600 hover:text-red-600 transition-colors"
+                  className="p-2 text-[var(--secondary-text-color)] hover:text-red-600 dark:hover:text-red-400 transition-colors"
                 >
                   <TrashIcon className="w-4 h-4" />
                 </button>

@@ -1,12 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  darkMode: 'class', // Use class strategy
   theme: {
     extend: {
       colors: {
         // Primary: Egyptian Blue (refined for better contrast and luxury)
         'egyptian-blue': {
-          50: '#e6f0ff', // Slightly darker for better contrast
+          50: '#e6f0ff',
           100: '#cce0ff',
           200: '#99c2ff',
           300: '#66a3ff',

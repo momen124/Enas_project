@@ -42,18 +42,19 @@ export const useStore = create<StoreState>()(
       cartOpen: false,
       addToCart: (product, size, color, quantity = 1) => {
         const existingItem = get().cart.find(
-          item => item.product.id === product.id && 
-                  item.size === size && 
-                  item.color.name === color.name
+          (item) =>
+            item.product.id === product.id &&
+            item.size === size &&
+            item.color.name === color.name
         );
-        
+
         if (existingItem) {
-          set(state => ({
-            cart: state.cart.map(item =>
+          set((state) => ({
+            cart: state.cart.map((item) =>
               item.id === existingItem.id
                 ? { ...item, quantity: item.quantity + quantity }
                 : item
-            )
+            ),
           }));
         } else {
           const newItem: CartItem = {
@@ -61,60 +62,60 @@ export const useStore = create<StoreState>()(
             product,
             quantity,
             size,
-            color
+            color,
           };
-          set(state => ({ cart: [...state.cart, newItem] }));
+          set((state) => ({ cart: [...state.cart, newItem] }));
         }
       },
-      
+
       removeFromCart: (id) => {
-        set(state => ({
-          cart: state.cart.filter(item => item.id !== id)
+        set((state) => ({
+          cart: state.cart.filter((item) => item.id !== id),
         }));
       },
-      
+
       updateQuantity: (id, quantity) => {
         if (quantity <= 0) {
           get().removeFromCart(id);
           return;
         }
-        set(state => ({
-          cart: state.cart.map(item =>
+        set((state) => ({
+          cart: state.cart.map((item) =>
             item.id === id ? { ...item, quantity } : item
-          )
+          ),
         }));
       },
-      
+
       clearCart: () => set({ cart: [] }),
       setCartOpen: (open) => set({ cartOpen: open }),
-      
+
       // User
       user: null,
       setUser: (user) => set({ user }),
-      
+
       // Wishlist
       wishlist: [],
       addToWishlist: (productId) => {
-        set(state => ({
-          wishlist: [...state.wishlist, productId]
+        set((state) => ({
+          wishlist: [...state.wishlist, productId],
         }));
       },
       removeFromWishlist: (productId) => {
-        set(state => ({
-          wishlist: state.wishlist.filter(id => id !== productId)
+        set((state) => ({
+          wishlist: state.wishlist.filter((id) => id !== productId),
         }));
       },
-      
+
       // Language
       language: 'en',
       setLanguage: (lang) => set({ language: lang }),
-      
+
       // Currency
       currency: 'EGP',
       setCurrency: (currency) => set({ currency }),
 
       // Theme
-      theme: 'light', // Default theme
+      theme: 'light',
       setTheme: (theme) => set({ theme }),
     }),
     {
@@ -125,8 +126,8 @@ export const useStore = create<StoreState>()(
         language: state.language,
         currency: state.currency,
         user: state.user,
-        theme: state.theme, // Persist theme to localStorage
-      })
+        theme: state.theme,
+      }),
     }
   )
 );

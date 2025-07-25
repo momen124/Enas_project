@@ -32,14 +32,14 @@ function App() {
     document.dir = language === 'ar' ? 'rtl' : 'ltr';
     document.documentElement.lang = language;
     i18n.changeLanguage(language);
-    
+
     // Apply appropriate font class to body
     document.body.className = language === 'ar' ? 'font-arabic' : 'font-english';
   }, [language, i18n]);
 
   return (
     <Router>
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-[var(--background-color)]">
         <Header />
         <main className="flex-1">
           <Routes>
@@ -62,8 +62,9 @@ function App() {
           toastOptions={{
             duration: 4000,
             style: {
-              background: '#363636',
-              color: '#fff',
+              background: 'var(--card-bg-color)',
+              color: 'var(--text-color)',
+              border: '1px solid var(--border-color)',
             },
           }}
         />

@@ -50,16 +50,16 @@ const CartSidebar: React.FC = () => {
                 leaveTo={isRTL ? '-translate-x-full' : 'translate-x-full'}
               >
                 <Dialog.Panel className="pointer-events-auto w-screen max-w-md">
-                  <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
+                  <div className="flex h-full flex-col overflow-y-scroll bg-[var(--background-color)] shadow-xl">
                     <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
                       <div className="flex items-start justify-between">
-                        <Dialog.Title className="text-lg font-medium text-gray-900">
+                        <Dialog.Title className="text-lg font-medium text-[var(--text-color)]">
                           {t('shoppingCart')}
                         </Dialog.Title>
                         <div className={`ml-3 flex h-7 items-center ${isRTL ? 'mr-3 ml-0' : ''}`}>
                           <button
                             type="button"
-                            className="-m-2 p-2 text-gray-400 hover:text-gray-500"
+                            className="-m-2 p-2 text-[var(--secondary-text-color)] hover:text-[var(--primary-color)]"
                             onClick={() => setCartOpen(false)}
                           >
                             <XMarkIcon className="h-6 w-6" />
@@ -70,21 +70,21 @@ const CartSidebar: React.FC = () => {
                       <div className="mt-8">
                         {cart.length === 0 ? (
                           <div className="text-center py-12">
-                            <p className="text-gray-500 mb-4">{t('cartEmpty')}</p>
+                            <p className="text-[var(--secondary-text-color)] mb-4">{t('cartEmpty')}</p>
                             <Link
                               to="/shop"
                               onClick={() => setCartOpen(false)}
-                              className="inline-block bg-egyptian-blue text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+                              className="inline-block bg-[var(--primary-color)] text-[var(--cream-white-500)] px-6 py-2 rounded-lg hover:bg-[var(--egyptian-blue-800)] transition-colors"
                             >
                               {t('continueShopping')}
                             </Link>
                           </div>
                         ) : (
                           <div className="flow-root">
-                            <ul role="list" className="-my-6 divide-y divide-gray-200">
+                            <ul role="list" className="-my-6 divide-y divide-[var(--border-color)]">
                               {cart.map((item) => (
                                 <li key={item.id} className="flex py-6">
-                                  <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                                  <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-[var(--border-color)]">
                                     <img
                                       src={item.color.image}
                                       alt={isRTL ? item.product.nameAr : item.product.name}
@@ -94,9 +94,9 @@ const CartSidebar: React.FC = () => {
 
                                   <div className={`ml-4 flex flex-1 flex-col ${isRTL ? 'mr-4 ml-0' : ''}`}>
                                     <div>
-                                      <div className="flex justify-between text-base font-medium text-gray-900">
+                                      <div className="flex justify-between text-base font-medium text-[var(--text-color)]">
                                         <h3>
-                                          <Link 
+                                          <Link
                                             to={`/product/${item.product.id}`}
                                             onClick={() => setCartOpen(false)}
                                           >
@@ -107,7 +107,7 @@ const CartSidebar: React.FC = () => {
                                           {formatPrice(item.product.price * item.quantity)}
                                         </p>
                                       </div>
-                                      <p className="mt-1 text-sm text-gray-500">
+                                      <p className="mt-1 text-sm text-[var(--secondary-text-color)]">
                                         {isRTL ? item.color.nameAr : item.color.name} • {item.size}
                                       </p>
                                     </div>
@@ -115,25 +115,25 @@ const CartSidebar: React.FC = () => {
                                       <div className="flex items-center">
                                         <button
                                           onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                                          className="p-1 hover:bg-gray-100 rounded"
+                                          className="p-1 hover:bg-[var(--hover-bg-color)] rounded"
                                         >
-                                          <MinusIcon className="w-4 h-4" />
+                                          <MinusIcon className="w-4 h-4 text-[var(--text-color)]" />
                                         </button>
-                                        <span className="mx-2 min-w-[2rem] text-center">
+                                        <span className="mx-2 min-w-[2rem] text-center text-[var(--text-color)]">
                                           {item.quantity}
                                         </span>
                                         <button
                                           onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                                          className="p-1 hover:bg-gray-100 rounded"
+                                          className="p-1 hover:bg-[var(--hover-bg-color)] rounded"
                                         >
-                                          <PlusIcon className="w-4 h-4" />
+                                          <PlusIcon className="w-4 h-4 text-[var(--text-color)]" />
                                         </button>
                                       </div>
 
                                       <button
                                         type="button"
                                         onClick={() => removeFromCart(item.id)}
-                                        className="font-medium text-red-600 hover:text-red-500"
+                                        className="font-medium text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300"
                                       >
                                         {t('remove')}
                                       </button>
@@ -148,21 +148,21 @@ const CartSidebar: React.FC = () => {
                     </div>
 
                     {cart.length > 0 && (
-                      <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
+                      <div className="border-t border-[var(--border-color)] px-4 py-6 sm:px-6">
                         <div className="space-y-2 text-sm">
-                          <div className="flex justify-between">
+                          <div className="flex justify-between text-[var(--text-color)]">
                             <span>{t('subtotal')}</span>
                             <span>{formatPrice(subtotal)}</span>
                           </div>
-                          <div className="flex justify-between">
+                          <div className="flex justify-between text-[var(--text-color)]">
                             <span>{t('shipping')}</span>
                             <span>{shipping === 0 ? 'Free' : formatPrice(shipping)}</span>
                           </div>
-                          <div className="flex justify-between">
+                          <div className="flex justify-between text-[var(--text-color)]">
                             <span>{t('tax')}</span>
                             <span>{formatPrice(tax)}</span>
                           </div>
-                          <div className="flex justify-between text-base font-medium text-gray-900 border-t pt-2">
+                          <div className="flex justify-between text-base font-medium text-[var(--text-color)] border-t border-[var(--border-color)] pt-2">
                             <span>{t('total')}</span>
                             <span>{formatPrice(total)}</span>
                           </div>
@@ -171,17 +171,17 @@ const CartSidebar: React.FC = () => {
                           <Link
                             to="/checkout"
                             onClick={() => setCartOpen(false)}
-                            className="flex items-center justify-center rounded-md border border-transparent bg-egyptian-blue px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-blue-700 transition-colors w-full"
+                            className="flex items-center justify-center rounded-md border border-transparent bg-[var(--primary-color)] text-[var(--cream-white-500)] px-6 py-3 text-base font-medium shadow-sm hover:bg-[var(--egyptian-blue-800)] transition-colors w-full"
                           >
                             {t('checkout')}
                           </Link>
                         </div>
-                        <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
+                        <div className="mt-6 flex justify-center text-center text-sm text-[var(--secondary-text-color)]">
                           <p>
                             or{' '}
                             <button
                               type="button"
-                              className="font-medium text-egyptian-blue hover:text-blue-700"
+                              className="font-medium text-[var(--primary-color)] hover:text-[var(--egyptian-blue-800)]"
                               onClick={() => setCartOpen(false)}
                             >
                               {t('continueShopping')}

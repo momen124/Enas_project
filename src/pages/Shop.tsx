@@ -152,31 +152,31 @@ const Shop: React.FC = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className="max-w-7xl mx-auto px-4 py-8 bg-[var(--card-bg-color)]">
       {/* Breadcrumb */}
       <nav className="mb-8" aria-label="Breadcrumb">
-        <div className={`flex items-center space-x-2 text-sm text-gray-500 ${isRTL ? 'space-x-reverse' : ''}`}>
-          <a href="/" className="hover:text-egyptian-blue-900">{t('home')}</a>
+        <div className={`flex items-center space-x-2 text-sm text-[var(--secondary-text-color)] ${isRTL ? 'space-x-reverse' : ''}`}>
+          <a href="/" className="hover:text-[var(--primary-color)]">{t('home')}</a>
           <span>/</span>
           {currentCategory ? (
-            <span className="text-gray-900">
+            <span className="text-[var(--text-color)]">
               {isRTL ? currentCategory.nameAr : currentCategory.name}
             </span>
           ) : (
-            <span className="text-gray-900">{t('shop')}</span>
+            <span className="text-[var(--text-color)]">{t('shop')}</span>
           )}
         </div>
       </nav>
 
       {/* Page Header */}
       <div className="mb-8">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">
+        <h1 className="text-4xl font-bold text-[var(--text-color)] mb-4">
           {currentCategory 
             ? (isRTL ? currentCategory.nameAr : currentCategory.name)
             : t('shop')
           }
         </h1>
-        <p className="text-gray-600">
+        <p className="text-[var(--secondary-text-color)]">
           {sortedProducts.length} {sortedProducts.length === 1 ? 'product' : 'products'} found
         </p>
       </div>
@@ -184,12 +184,12 @@ const Shop: React.FC = () => {
       <div className="flex flex-col lg:flex-row gap-8">
         {/* Filters Sidebar */}
         <div className={`lg:w-1/4 ${showFilters ? 'block' : 'hidden lg:block'}`}>
-          <div className="bg-white rounded-lg shadow-sm border p-6 sticky top-4">
+          <div className="bg-[var(--card-bg-color)] rounded-lg shadow-[0_1px_3px_var(--shadow-color)] border border-[var(--border-color)] p-6 sticky top-4">
             <div className="flex items-center justify-between mb-6">
-              <h3 className="text-lg font-semibold">Filters</h3>
+              <h3 className="text-lg font-semibold text-[var(--text-color)]">Filters</h3>
               <button
                 onClick={clearFilters}
-                className="text-sm text-egyptian-blue-600 hover:text-egyptian-blue-800"
+                className="text-sm text-[var(--primary-color)] hover:text-[var(--hover-bg-color)]"
               >
                 Clear All
               </button>
@@ -197,7 +197,7 @@ const Shop: React.FC = () => {
 
             {/* Price Range */}
             <div className="mb-6">
-              <h4 className="font-medium mb-3">Price Range</h4>
+              <h4 className="font-medium text-[var(--text-color)] mb-3">Price Range</h4>
               <div className="space-y-3">
                 <input
                   type="range"
@@ -207,7 +207,7 @@ const Shop: React.FC = () => {
                   onChange={(e) => handleFilterChange('priceRange', [0, parseInt(e.target.value)])}
                   className="w-full"
                 />
-                <div className="flex justify-between text-sm text-gray-600">
+                <div className="flex justify-between text-sm text-[var(--secondary-text-color)]">
                   <span>0 EGP</span>
                   <span>{filters.priceRange[1]} EGP</span>
                 </div>
@@ -216,7 +216,7 @@ const Shop: React.FC = () => {
 
             {/* Colors */}
             <div className="mb-6">
-              <h4 className="font-medium mb-3">Colors</h4>
+              <h4 className="font-medium text-[var(--text-color)] mb-3">Colors</h4>
               <div className="space-y-2 max-h-40 overflow-y-auto">
                 {availableColors.map(color => (
                   <label key={color} className="flex items-center">
@@ -230,7 +230,7 @@ const Shop: React.FC = () => {
                           handleFilterChange('colors', filters.colors.filter(c => c !== color));
                         }
                       }}
-                      className="rounded border-gray-300 text-egyptian-blue-600 focus:ring-egyptian-blue-500"
+                      className="rounded border-[var(--border-color)] text-[var(--primary-color)] focus:ring-[var(--primary-color)]"
                     />
                     <span className={`text-sm ${isRTL ? 'mr-2' : 'ml-2'}`}>{color}</span>
                   </label>
@@ -240,7 +240,7 @@ const Shop: React.FC = () => {
 
             {/* Sizes */}
             <div className="mb-6">
-              <h4 className="font-medium mb-3">Sizes</h4>
+              <h4 className="font-medium text-[var(--text-color)] mb-3">Sizes</h4>
               <div className="grid grid-cols-2 gap-2">
                 {availableSizes.map(size => (
                   <label key={size} className="flex items-center">
@@ -254,7 +254,7 @@ const Shop: React.FC = () => {
                           handleFilterChange('sizes', filters.sizes.filter(s => s !== size));
                         }
                       }}
-                      className="rounded border-gray-300 text-egyptian-blue-600 focus:ring-egyptian-blue-500"
+                      className="rounded border-[var(--border-color)] text-[var(--primary-color)] focus:ring-[var(--primary-color)]"
                     />
                     <span className={`text-sm ${isRTL ? 'mr-2' : 'ml-2'}`}>{size}</span>
                   </label>
@@ -264,14 +264,14 @@ const Shop: React.FC = () => {
 
             {/* Availability */}
             <div className="mb-6">
-              <h4 className="font-medium mb-3">Availability</h4>
+              <h4 className="font-medium text-[var(--text-color)] mb-3">Availability</h4>
               <div className="space-y-2">
                 <label className="flex items-center">
                   <input
                     type="checkbox"
                     checked={filters.inStock}
                     onChange={(e) => handleFilterChange('inStock', e.target.checked)}
-                    className="rounded border-gray-300 text-egyptian-blue-600 focus:ring-egyptian-blue-500"
+                    className="rounded border-[var(--border-color)] text-[var(--primary-color)] focus:ring-[var(--primary-color)]"
                   />
                   <span className={`text-sm ${isRTL ? 'mr-2' : 'ml-2'}`}>In Stock Only</span>
                 </label>
@@ -280,7 +280,7 @@ const Shop: React.FC = () => {
                     type="checkbox"
                     checked={filters.onSale}
                     onChange={(e) => handleFilterChange('onSale', e.target.checked)}
-                    className="rounded border-gray-300 text-egyptian-blue-600 focus:ring-egyptian-blue-500"
+                    className="rounded border-[var(--border-color)] text-[var(--primary-color)] focus:ring-[var(--primary-color)]"
                   />
                   <span className={`text-sm ${isRTL ? 'mr-2' : 'ml-2'}`}>On Sale</span>
                 </label>
@@ -292,11 +292,11 @@ const Shop: React.FC = () => {
         {/* Products Section */}
         <div className="lg:w-3/4">
           {/* Toolbar */}
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 bg-white rounded-lg shadow-sm border p-4">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 bg-[var(--card-bg-color)] rounded-lg shadow-[0_1px_3px_var(--shadow-color)] border border-[var(--border-color)] p-4">
             <div className={`flex items-center space-x-4 mb-4 sm:mb-0 ${isRTL ? 'space-x-reverse' : ''}`}>
               <button
                 onClick={() => setShowFilters(!showFilters)}
-                className="lg:hidden flex items-center space-x-2 text-gray-600 hover:text-gray-900"
+                className="lg:hidden flex items-center space-x-2 text-[var(--secondary-text-color)] hover:text-[var(--primary-color)]"
               >
                 <FunnelIcon className="w-5 h-5" />
                 <span>Filters</span>
@@ -305,13 +305,17 @@ const Shop: React.FC = () => {
               <div className={`flex items-center space-x-2 ${isRTL ? 'space-x-reverse' : ''}`}>
                 <button
                   onClick={() => setViewMode('grid')}
-                  className={`p-2 rounded-lg ${viewMode === 'grid' ? 'bg-egyptian-blue-100 text-egyptian-blue-900' : 'text-gray-600 hover:text-gray-900'}`}
+                  className={`p-2 rounded-lg ${
+                    viewMode === 'grid' ? 'bg-[var(--primary-color)] text-[var(--card-bg-color)]' : 'text-[var(--secondary-text-color)] hover:text-[var(--primary-color)]'
+                  }`}
                 >
                   <Squares2X2Icon className="w-5 h-5" />
                 </button>
                 <button
                   onClick={() => setViewMode('list')}
-                  className={`p-2 rounded-lg ${viewMode === 'list' ? 'bg-egyptian-blue-100 text-egyptian-blue-900' : 'text-gray-600 hover:text-gray-900'}`}
+                  className={`p-2 rounded-lg ${
+                    viewMode === 'list' ? 'bg-[var(--primary-color)] text-[var(--card-bg-color)]' : 'text-[var(--secondary-text-color)] hover:text-[var(--primary-color)]'
+                  }`}
                 >
                   <ListBulletIcon className="w-5 h-5" />
                 </button>
@@ -319,11 +323,11 @@ const Shop: React.FC = () => {
             </div>
 
             <div className={`flex items-center space-x-4 ${isRTL ? 'space-x-reverse' : ''}`}>
-              <span className="text-sm text-gray-600">Sort by:</span>
+              <span className="text-sm text-[var(--secondary-text-color)]">Sort by:</span>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="border-gray-300 rounded-lg text-sm focus:ring-egyptian-blue-500 focus:border-egyptian-blue-500"
+                className="border-[var(--border-color)] rounded-lg text-sm focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)]"
               >
                 <option value="featured">Featured</option>
                 <option value="newest">Newest</option>
@@ -338,14 +342,14 @@ const Shop: React.FC = () => {
           {/* Products Grid/List */}
           {sortedProducts.length === 0 ? (
             <div className="text-center py-12">
-              <div className="text-gray-400 mb-4">
+              <div className="text-[var(--secondary-text-color)] mb-4">
                 <AdjustmentsHorizontalIcon className="w-16 h-16 mx-auto" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">No products found</h3>
-              <p className="text-gray-600 mb-4">Try adjusting your filters or search terms</p>
+              <h3 className="text-lg font-semibold text-[var(--text-color)] mb-2">No products found</h3>
+              <p className="text-[var(--secondary-text-color)] mb-4">Try adjusting your filters or search terms</p>
               <button
                 onClick={clearFilters}
-                className="bg-egyptian-blue-600 text-white px-6 py-2 rounded-lg hover:bg-egyptian-blue-700 transition-colors"
+                className="bg-[var(--primary-color)] text-[var(--card-bg-color)] px-6 py-2 rounded-lg hover:bg-[var(--hover-bg-color)] transition-colors"
               >
                 Clear Filters
               </button>
@@ -370,11 +374,11 @@ const Shop: React.FC = () => {
           {sortedProducts.length > 12 && (
             <div className="mt-12 flex justify-center">
               <nav className="flex items-center space-x-2">
-                <button className="px-3 py-2 text-sm text-gray-500 hover:text-gray-700">Previous</button>
-                <button className="px-3 py-2 text-sm bg-egyptian-blue-600 text-white rounded">1</button>
-                <button className="px-3 py-2 text-sm text-gray-700 hover:text-gray-900">2</button>
-                <button className="px-3 py-2 text-sm text-gray-700 hover:text-gray-900">3</button>
-                <button className="px-3 py-2 text-sm text-gray-500 hover:text-gray-700">Next</button>
+                <button className="px-3 py-2 text-sm text-[var(--secondary-text-color)] hover:text-[var(--primary-color)]">Previous</button>
+                <button className="px-3 py-2 text-sm bg-[var(--primary-color)] text-[var(--card-bg-color)] rounded">1</button>
+                <button className="px-3 py-2 text-sm text-[var(--text-color)] hover:text-[var(--primary-color)]">2</button>
+                <button className="px-3 py-2 text-sm text-[var(--text-color)] hover:text-[var(--primary-color)]">3</button>
+                <button className="px-3 py-2 text-sm text-[var(--secondary-text-color)] hover:text-[var(--primary-color)]">Next</button>
               </nav>
             </div>
           )}

@@ -32,26 +32,26 @@ const Wishlist: React.FC = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className="max-w-7xl mx-auto px-4 py-8 bg-[var(--card-bg-color)]">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">My Wishlist</h1>
-        <p className="text-gray-600">
+        <h1 className="text-3xl font-bold text-[var(--text-color)] mb-2">My Wishlist</h1>
+        <p className="text-[var(--secondary-text-color)]">
           {wishlistProducts.length} {wishlistProducts.length === 1 ? 'item' : 'items'} saved for later
         </p>
       </div>
 
       {wishlistProducts.length === 0 ? (
         <div className="text-center py-16">
-          <div className="text-gray-400 mb-6">
+          <div className="text-[var(--secondary-text-color)] mb-6">
             <HeartIcon className="w-24 h-24 mx-auto" />
           </div>
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">Your wishlist is empty</h2>
-          <p className="text-gray-600 mb-8 max-w-md mx-auto">
+          <h2 className="text-2xl font-semibold text-[var(--text-color)] mb-4">Your wishlist is empty</h2>
+          <p className="text-[var(--secondary-text-color)] mb-8 max-w-md mx-auto">
             Save your favorite products here and never lose track of what you love.
           </p>
           <Link
             to="/shop"
-            className="bg-egyptian-blue-600 text-white px-8 py-3 rounded-lg hover:bg-egyptian-blue-700 transition-colors inline-block"
+            className="bg-[var(--primary-color)] text-[var(--card-bg-color)] px-8 py-3 rounded-lg hover:bg-[var(--hover-bg-color)] transition-colors inline-block"
           >
             Start Shopping
           </Link>
@@ -59,7 +59,7 @@ const Wishlist: React.FC = () => {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {wishlistProducts.map(product => (
-            <div key={product.id} className="bg-white rounded-lg shadow-sm border hover:shadow-md transition-shadow duration-300">
+            <div key={product.id} className="bg-[var(--card-bg-color)] rounded-lg shadow-sm border border-[var(--border-color)] hover:shadow-md transition-shadow duration-300">
               <div className="relative overflow-hidden rounded-t-lg">
                 <Link to={`/product/${product.id}`}>
                   <img
@@ -72,7 +72,7 @@ const Wishlist: React.FC = () => {
                 {/* Remove from Wishlist Button */}
                 <button
                   onClick={() => handleRemoveFromWishlist(product.id)}
-                  className={`absolute top-2 p-2 bg-white rounded-full shadow-md hover:shadow-lg transition-all duration-200 hover:bg-red-50 ${isRTL ? 'left-2' : 'right-2'}`}
+                  className={`absolute top-2 p-2 bg-[var(--card-bg-color)] rounded-full shadow-md hover:shadow-lg transition-all duration-200 hover:bg-[var(--hover-bg-color)] ${isRTL ? 'left-2' : 'right-2'}`}
                   title="Remove from wishlist"
                 >
                   <TrashIcon className="w-5 h-5 text-red-500" />
@@ -95,24 +95,24 @@ const Wishlist: React.FC = () => {
 
               <div className="p-4">
                 <div className="mb-2">
-                  <span className="text-sm text-gray-500">
+                  <span className="text-sm text-[var(--secondary-text-color)]">
                     {isRTL ? product.categoryAr : product.category}
                   </span>
                 </div>
 
                 <Link to={`/product/${product.id}`}>
-                  <h3 className="font-semibold text-gray-900 mb-2 hover:text-egyptian-blue-600 transition-colors line-clamp-2">
+                  <h3 className="font-semibold text-[var(--text-color)] mb-2 hover:text-[var(--primary-color)] transition-colors line-clamp-2">
                     {isRTL ? product.nameAr : product.name}
                   </h3>
                 </Link>
 
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center space-x-2">
-                    <span className="text-lg font-bold text-gray-900">
+                    <span className="text-lg font-bold text-[var(--text-color)]">
                       {formatPrice(product.price)}
                     </span>
                     {product.originalPrice && (
-                      <span className="text-sm text-gray-500 line-through">
+                      <span className="text-sm text-[var(--secondary-text-color)] line-through">
                         {formatPrice(product.originalPrice)}
                       </span>
                     )}
@@ -130,14 +130,14 @@ const Wishlist: React.FC = () => {
                   {product.colors.slice(0, 4).map((color, index) => (
                     <div
                       key={index}
-                      className="w-6 h-6 rounded-full border-2 border-gray-200"
+                      className="w-6 h-6 rounded-full border-2 border-[var(--border-color)]"
                       style={{ backgroundColor: color.hex }}
                       title={isRTL ? color.nameAr : color.name}
                     />
                   ))}
                   {product.colors.length > 4 && (
-                    <div className="w-6 h-6 rounded-full border-2 border-gray-200 bg-gray-100 flex items-center justify-center">
-                      <span className="text-xs text-gray-600">+{product.colors.length - 4}</span>
+                    <div className="w-6 h-6 rounded-full border-2 border-[var(--border-color)] bg-[var(--card-bg-color)] flex items-center justify-center">
+                      <span className="text-xs text-[var(--secondary-text-color)]">+{product.colors.length - 4}</span>
                     </div>
                   )}
                 </div>
@@ -147,7 +147,7 @@ const Wishlist: React.FC = () => {
                   <button
                     onClick={() => handleAddToCart(product)}
                     disabled={product.stock === 0}
-                    className="flex-1 bg-egyptian-blue-600 text-white py-2 px-4 rounded-lg hover:bg-egyptian-blue-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+                    className="flex-1 bg-[var(--primary-color)] text-[var(--card-bg-color)] py-2 px-4 rounded-lg hover:bg-[var(--hover-bg-color)] transition-colors disabled:bg-[var(--border-color)] disabled:cursor-not-allowed flex items-center justify-center space-x-2"
                   >
                     <ShoppingBagIcon className="w-4 h-4" />
                     <span>Add to Cart</span>
@@ -162,13 +162,13 @@ const Wishlist: React.FC = () => {
       {/* Recommendations */}
       {wishlistProducts.length > 0 && (
         <div className="mt-16">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">You might also like</h2>
+          <h2 className="text-2xl font-bold text-[var(--text-color)] mb-6">You might also like</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {products
               .filter(product => !wishlist.includes(product.id))
               .slice(0, 4)
               .map(product => (
-                <div key={product.id} className="bg-white rounded-lg shadow-sm border">
+                <div key={product.id} className="bg-[var(--card-bg-color)] rounded-lg shadow-sm border border-[var(--border-color)]">
                   <Link to={`/product/${product.id}`}>
                     <img
                       src={product.images[0]}
@@ -177,10 +177,10 @@ const Wishlist: React.FC = () => {
                     />
                   </Link>
                   <div className="p-4">
-                    <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2">
+                    <h3 className="font-semibold text-[var(--text-color)] mb-2 line-clamp-2">
                       {isRTL ? product.nameAr : product.name}
                     </h3>
-                    <p className="text-lg font-bold text-gray-900">
+                    <p className="text-lg font-bold text-[var(--text-color)]">
                       {formatPrice(product.price)}
                     </p>
                   </div>
