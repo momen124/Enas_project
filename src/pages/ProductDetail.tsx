@@ -19,7 +19,7 @@ const ProductDetail: React.FC = () => {
     removeFromWishlist 
   } = useStore();
   
-  const [selectedSize, setSelectedSize] = useState<string>('');
+  const [selectedSize, setSelectedSize] = useState<{ name: string; cm: string } | null>(null);
   const [selectedColor, setSelectedColor] = useState<any>(null);
   const [quantity, setQuantity] = useState(1);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
@@ -48,7 +48,7 @@ const ProductDetail: React.FC = () => {
       return;
     }
     
-    addToCart(product, selectedSize, selectedColor, quantity);
+    addToCart(product, selectedSize.name, selectedColor, quantity);
     toast.success(`Added to cart!`);
   };
 
@@ -184,18 +184,19 @@ const ProductDetail: React.FC = () => {
           {/* Size Selection */}
           <div>
             <h3 className="text-lg font-semibold text-[var(--text-color)] mb-3">{t('selectSize')}</h3>
-            <div className={`grid grid-cols-4 gap-3`}>
+            <div className={`grid grid-cols-2 gap-3 ${isRTL ? 'grid-cols-2-reverse' : ''}`}>
               {product.sizes.map((size) => (
                 <button
-                  key={size}
+                  key={size.name}
                   onClick={() => setSelectedSize(size)}
-                  className={`py-2 px-4 border rounded-lg text-center transition-colors ${
-                    selectedSize === size
+                  className={`py-2 px-4 border rounded-lg text-center transition-colors flex flex-col items-center ${
+                    selectedSize?.name === size.name
                       ? 'border-[var(--primary-color)] bg-[var(--primary-color)] text-[var(--card-bg-color)]'
                       : 'border-[var(--border-color)] hover:border-[var(--hover-bg-color)]'
                   }`}
                 >
-                  {size}
+                  <span className="font-medium">{size.name}</span>
+                  <span className="text-xs text-[var(--secondary-text-color)]">{size.cm} cm</span>
                 </button>
               ))}
             </div>

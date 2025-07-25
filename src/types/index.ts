@@ -1,3 +1,5 @@
+
+
 export interface Product {
   id: string;
   name: string;
@@ -10,7 +12,7 @@ export interface Product {
   category: string;
   categoryAr: string;
   subcategory?: string;
-  sizes: string[];
+  sizes: Size[];
   colors: ProductColor[];
   stock: number;
   threadCount?: number;
@@ -24,6 +26,12 @@ export interface Product {
   rating: number;
   reviewCount: number;
 }
+
+interface Size {
+  name: string;
+  cm: string;
+}
+
 
 export interface ProductColor {
   name: string;

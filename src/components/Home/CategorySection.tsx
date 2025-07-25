@@ -23,8 +23,25 @@ const categories = [
     slug: "decor",
     image: "https://images.pexels.com/photos/5996971/pexels-photo-5996971.jpeg?auto=compress&cs=tinysrgb&w=400",
   },
+  {
+    id: "4",
+    name: "Kitchen",
+    slug: "kitchen",
+    image: "https://images.pexels.com/photos/3747234/pexels-photo-3747234.jpeg?auto=compress&cs=tinysrgb&w=400",
+  },
+  {
+    id: "5",
+    name: "Living Room",
+    slug: "living-room",
+    image: "https://images.pexels.com/photos/276624/pexels-photo-276624.jpeg?auto=compress&cs=tinysrgb&w=400",
+  },
+  {
+    id: "6",
+    name: "Outdoor",
+    slug: "outdoor",
+    image: "https://images.pexels.com/photos/1679646/pexels-photo-1679646.jpeg?auto=compress&cs=tinysrgb&w=400",
+  },
 ];
-
 export default function CategorySection() {
   const scrollRef = useRef<HTMLDivElement>(null);
 

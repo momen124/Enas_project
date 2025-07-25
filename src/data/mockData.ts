@@ -6,7 +6,12 @@ import img3 from './Mockassets/3.jpg';
 import img4 from './Mockassets/4.jpg';
 import img5 from './Mockassets/5.jpg';
 import img6 from './Mockassets/6.jpg';
-
+import img7 from './Mockassets/7.jpg';
+import img8 from './Mockassets/8.jpg';
+import img9 from './Mockassets/9.jpg';
+import img10 from './Mockassets/10.jpg';
+import img11 from './Mockassets/11.jpg'; // Added
+import img12 from './Mockassets/12.jpg'; // Added
 
 export const categories: Category[] = [
   {
@@ -73,7 +78,7 @@ export const categories: Category[] = [
 ];
 
 export const products: Product[] = [
- {
+  {
     id: '201',
     name: 'Classic Linen Sheet Set',
     nameAr: 'طقم ملاءات كتان كلاسيكي',
@@ -85,7 +90,12 @@ export const products: Product[] = [
     category: 'Bed Sheets Sets',
     categoryAr: 'أطقم ملاءات السرير',
     subcategory: 'Plain Sheets',
-    sizes: ['Single', 'Double', 'Queen', 'King'],
+    sizes: [
+      { name: 'Single', cm: '90x200' },
+      { name: 'Double', cm: '140x200' },
+      { name: 'Queen', cm: '160x200' },
+      { name: 'King', cm: '180x200' },
+    ],
     colors: [
       {
         name: 'Natural',
@@ -124,7 +134,12 @@ export const products: Product[] = [
     category: 'Duvets',
     categoryAr: 'لحاف',
     subcategory: '100% Linen',
-    sizes: ['Double', 'Queen', 'King'],
+    sizes: [
+      { name: 'Single', cm: '90x200' },
+      { name: 'Double', cm: '140x200' },
+      { name: 'Queen', cm: '160x200' },
+      { name: 'King', cm: '180x200' },
+    ],
     colors: [
       {
         name: 'Blush',
@@ -163,7 +178,10 @@ export const products: Product[] = [
     category: 'Add Ons',
     categoryAr: 'إضافات',
     subcategory: 'Linen Pillowcases',
-    sizes: ['Standard', 'King'],
+    sizes: [
+      { name: 'Standard', cm: '50x70' }, // Converted to Size object
+      { name: 'King', cm: '50x90' },     // Converted to Size object
+    ],
     colors: [
       {
         name: 'Linen White',
@@ -189,5 +207,132 @@ export const products: Product[] = [
     newArrival: true,
     rating: 4.6,
     reviewCount: 67
-  }
+  },
+  {
+    id: '204',
+    name: 'Luxury Bath Towel Set',
+    nameAr: 'طقم مناشف استحمام فاخرة',
+    description: 'A set of plush linen bath towels designed for maximum absorbency and softness.',
+    descriptionAr: 'طقم مناشف استحمام من الكتان مصمم للامتصاص القصوى والنعومة.',
+    price: 1200,
+    originalPrice: 1500,
+    images: [img7, img8],
+    category: 'Towels & Bathrobes',
+    categoryAr: 'المناشف وأرواب الحمام',
+    subcategory: 'Towels',
+    sizes: [
+      { name: 'Small', cm: '50x100' },
+      { name: 'Medium', cm: '70x140' },
+      { name: 'Large', cm: '90x180' },
+    ],
+    colors: [
+      {
+        name: 'Seafoam',
+        nameAr: 'أخضر بحر',
+        hex: '#A3D8D4',
+        image: img7
+      },
+      {
+        name: 'Slate',
+        nameAr: 'أسود متدرج',
+        hex: '#6D8299',
+        image: img8
+      }
+    ],
+    stock: 25,
+    threadCount: undefined,
+    material: '100% Linen Blend',
+    materialAr: 'خليط كتان ١٠٠٪',
+    careInstructions: 'Machine wash warm, tumble dry low',
+    careInstructionsAr: 'غسيل بماء دافئ، تجفيف منخفض',
+    featured: false,
+    bestseller: false,
+    newArrival: true,
+    rating: 4.7,
+    reviewCount: 89
+  },
+  {
+    id: '205',
+    name: 'Handwoven Decorative Throw',
+    nameAr: 'بطانية ديكور منسوجة يدوياً',
+    description: 'A stylish handwoven throw perfect for adding warmth and texture to any room.',
+    descriptionAr: 'بطانية ديكور منسوجة يدوياً مثالية لإضافة الدفء والملمس لأي غرفة.',
+    price: 1800,
+    originalPrice: 2200,
+    images: [img9, img10],
+    category: 'Coverlets',
+    categoryAr: 'أغطية السرير',
+    subcategory: 'Throws',
+    sizes: [
+      { name: 'Small', cm: '100x150' },
+      { name: 'Large', cm: '130x170' },
+    ],
+    colors: [
+      {
+        name: 'Terracotta',
+        nameAr: 'تراكوتا',
+        hex: '#C85A54',
+        image: img9
+      },
+      {
+        name: 'Ochre',
+        nameAr: 'أوكر',
+        hex: '#D4A017',
+        image: img10
+      }
+    ],
+    stock: 15,
+    threadCount: undefined,
+    material: '100% Linen',
+    materialAr: 'كتان ١٠٠٪',
+    careInstructions: 'Dry clean only',
+    careInstructionsAr: 'تنظيف جاف فقط',
+    featured: true,
+    bestseller: false,
+    newArrival: false,
+    rating: 4.5,
+    reviewCount: 54
+  },
+  {
+    id: '206',
+    name: 'Outdoor Linen Cushion Cover',
+    nameAr: 'غطاء وسادة كتان خارجي',
+    description: 'Durable linen cushion cover designed for outdoor use, with UV and water resistance.',
+    descriptionAr: 'غطاء وسادة من الكتان مصمم للاستخدام الخارجي مع مقاومة الأشعة فوق البنفسجية والماء.',
+    price: 900,
+    originalPrice: 1100,
+    images: [img11, img12],
+    category: 'Add Ons',
+    categoryAr: 'إضافات',
+    subcategory: 'Cushion Covers',
+    sizes: [
+      { name: 'Square', cm: '50x50' },
+      { name: 'Rectangle', cm: '40x60' },
+    ],
+    colors: [
+      {
+        name: 'Sage',
+        nameAr: 'سفير',
+        hex: '#9AB87A',
+        image: img11
+      },
+      {
+        name: 'Charcoal',
+        nameAr: 'فحمي',
+        hex: '#36454F',
+        image: img12
+      }
+    ],
+    stock: 30,
+    threadCount: undefined,
+    material: '100% Weather-Resistant Linen',
+    materialAr: 'كتان مقاوم للطقس ١٠٠٪',
+    careInstructions: 'Spot clean with damp cloth',
+    careInstructionsAr: 'تنظيف موضعي بقماش رطب',
+    featured: false,
+    bestseller: true,
+    newArrival: true,
+    rating: 4.4,
+    reviewCount: 73
+  },
 ];

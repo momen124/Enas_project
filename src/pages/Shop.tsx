@@ -25,7 +25,7 @@ const Shop: React.FC = () => {
   const [filters, setFilters] = useState({
     priceRange: [0, 5000],
     colors: [] as string[],
-    sizes: [] as string[],
+    sizes: [] as string[], // Stores size names as strings
     materials: [] as string[],
     inStock: false,
     onSale: false,
@@ -80,7 +80,7 @@ const Shop: React.FC = () => {
     // Apply size filter
     if (filters.sizes.length > 0) {
       filtered = filtered.filter(product =>
-        product.sizes.some(size => filters.sizes.includes(size))
+        product.sizes.some(size => filters.sizes.includes(size.name)) // Check size.name
       );
     }
 
@@ -131,7 +131,7 @@ const Shop: React.FC = () => {
   const availableSizes = useMemo(() => {
     const sizes = new Set<string>();
     products.forEach(product => {
-      product.sizes.forEach(size => sizes.add(size));
+      product.sizes.forEach(size => sizes.add(size.name)); // Collect size.name
     });
     return Array.from(sizes);
   }, []);
