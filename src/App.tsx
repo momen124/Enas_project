@@ -1,14 +1,7 @@
-import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-import { useTranslation } from 'react-i18next';
-import { useStore } from './store/useStore';
-
-// Layout Components
-import Header from './components/Layout/Header';
-import Footer from './components/Layout/Footer';
-
-// Pages
+import ClientLayout from './components/Layout/ClientLayout';
+import AdminLayout from './components/admin/AdminLayout';
 import Home from './pages/Home';
 import Shop from './pages/Shop';
 import ProductDetail from './pages/ProductDetail';
@@ -19,30 +12,18 @@ import Wishlist from './pages/Wishlist';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Search from './pages/Search';
-
-// Import i18n
 import './i18n';
+import './index.css';
+import AdminDashboard from './pages/admin/page';
+import OrdersPage from './pages/admin/orders/page';
+import ProductsPage from './pages/admin/products/page';
 
 function App() {
-  const { language } = useStore();
-  const { i18n } = useTranslation();
-
-  useEffect(() => {
-    // Set document direction based on language
-    document.dir = language === 'ar' ? 'rtl' : 'ltr';
-    document.documentElement.lang = language;
-    i18n.changeLanguage(language);
-
-    // Apply appropriate font class to body
-    document.body.className = language === 'ar' ? 'font-arabic' : 'font-english';
-  }, [language, i18n]);
-
   return (
     <Router>
-      <div className="min-h-screen bg-[var(--background-color)]">
-        <Header />
-        <main className="flex-1">
-          <Routes>
+      <div className="min-h-screen bg-slate-700 text-gray-200">
+        <Routes>
+          <Route element={<ClientLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/shop" element={<Shop />} />
             <Route path="/category/:slug" element={<Shop />} />
@@ -54,17 +35,21 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/search" element={<Search />} />
-          </Routes>
-        </main>
-        <Footer />
+          </Route>
+          <Route element={<AdminLayout />}>
+            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin/orders" element={<OrdersPage />} />
+            <Route path="/admin/products" element={<ProductsPage />} />
+          </Route>
+        </Routes>
         <Toaster
-          position={language === 'ar' ? 'bottom-left' : 'bottom-right'}
+          position="bottom-right"
           toastOptions={{
             duration: 4000,
             style: {
-              background: 'var(--card-bg-color)',
-              color: 'var(--text-color)',
-              border: '1px solid var(--border-color)',
+              background: '#2D3748',
+              color: '#E5E7EB',
+              border: '1px solid #4A5568',
             },
           }}
         />
