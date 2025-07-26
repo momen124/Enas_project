@@ -7,7 +7,7 @@ export default function ClientLayout() {
   return (
     <>
       <Header />
-      <main className="flex-1 bg-gray-800 text-gray-200">
+      <main className="flex-1  text-gray-200">
         <Outlet />
       </main>
       <Footer />

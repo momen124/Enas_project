@@ -21,7 +21,7 @@ import ProductsPage from './pages/admin/products/page';
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-slate-700 text-gray-200">
+      <div className="min-h-screen text-gray-200">
         <Routes>
           <Route element={<ClientLayout />}>
             <Route path="/" element={<Home />} />

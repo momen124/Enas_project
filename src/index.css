@@ -1,11 +1,10 @@
-/* src/index.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
   /* Light theme (default) */
-  --background-color: #eddccf; /* primary-300 (Stark White) */
+  --background-color: #eddccf; /* primary-300 (light beige) */
   --text-color: #5e5042; /* secondary-500 (Kabul) */
   --secondary-text-color: #847d75; /* neutral-500 (Friar Gray) */
   --border-color: #aaa9a3; /* neutral-400 */
@@ -16,22 +15,65 @@
   --secondary-800: #2f2822; /* secondary-800 (Kabul) */
   --neutral-800: #5a534e; /* neutral-800 (Friar Gray) */
   --accent-800: #584d4d; /* accent-800 (Spicy Pink) */
+
+  /* Admin Primary Theme (Light) */
+  --admin-primary: #0c244b; /* deep-navy-900 */
+  --admin-foreground: #fefcf5; /* cream-white-200 */
+  --admin-header-bg: #06121e; /* deep-navy-800 */
+  --admin-accent: #ffb833; /* gold-accent-400 */
+  --admin-accent-hover: #ffca66; /* gold-accent-300 */
+  --admin-border: #030c14; /* deep-navy-950 */
+  --admin-badge: #1957b3; /* egyptian-blue-600 */
+
+  /* Override sidebar defaults */
+  --sidebar-background: var(--admin-primary); /* Use admin-primary */
+  --sidebar-foreground: var(--admin-foreground);
+  --sidebar-primary: var(--admin-accent);
+  --sidebar-primary-foreground: var(--admin-foreground);
+  --sidebar-accent: var(--admin-accent);
+  --sidebar-accent-foreground: var(--admin-foreground);
+  --sidebar-border: var(--admin-border);
+  --sidebar-ring: var(--admin-accent-hover);
 }
 
 .dark,
 [data-theme="dark"] {
   /* Dark theme */
-  --background-color: #2f2822; /* secondary-800 (Kabul) */
+  --background-color: #4e4237; /* secondary-600 (lighter dark shade) */
   --text-color: #faf6f2; /* primary-50 (Stark White) */
   --secondary-text-color: #d4d4d1; /* neutral-200 (Friar Gray) */
   --border-color: #4c4541; /* neutral-900 */
-  --hover-bg-color: #4e4237; /* secondary-600 */
+  --hover-bg-color: #3e3734; /* neutral-950 */
   --primary-color: #817474; /* accent-500 (Spicy Pink) */
-  --card-bg-color: #3e3734; /* neutral-950 */
+  --card-bg-color: #2f2822; /* secondary-800 (Kabul) */
   --shadow-color: rgba(0, 0, 0, 0.15);
   --secondary-800: #2f2822; /* secondary-800 (Kabul) */
   --neutral-800: #5a534e; /* neutral-800 (Friar Gray) */
   --accent-800: #584d4d; /* accent-800 (Spicy Pink) */
+
+  /* Admin Primary Theme (Dark) */
+  --admin-primary: #06121e; /* deep-navy-800 */
+  --admin-foreground: #d1d5db; /* soft-gray-300 */
+  --admin-header-bg: #030c14; /* deep-navy-950 */
+  --admin-accent: #d98c1d; /* gold-accent-600 */
+  --admin-accent-hover: #b37318; /* gold-accent-700 */
+  --admin-border: #02080d; /* deep-navy-950 */
+  --admin-badge: #3385ff; /* egyptian-blue-400 */
+
+  /* Override sidebar defaults */
+  --sidebar-background: var(--admin-primary); /* Use admin-primary */
+  --sidebar-foreground: var(--admin-foreground);
+  --sidebar-primary: var(--admin-accent);
+  --sidebar-primary-foreground: var(--admin-foreground);
+  --sidebar-accent: var(--admin-accent);
+  --sidebar-accent-foreground: var(--admin-foreground);
+  --sidebar-border: var(--admin-border);
+  --sidebar-ring: var(--admin-accent-hover);
+}
+
+/* Ensure sidebar background is enforced */
+[data-sidebar="sidebar"] {
+  background-color: var(--admin-primary) !important;
 }
 
 * {
@@ -82,19 +124,19 @@ textarea:focus {
 }
 
 button {
-  background-color: transparent; /* Removed default card-bg-color to avoid shadow */
+  background-color: transparent;
   color: var(--text-color);
   transition: color 0.3s;
-  padding: 0.5rem; /* Adjusted padding for consistency */
+  padding: 0.5rem;
 }
 
 button:hover {
-  color: var(--primary-color); /* Simplified hover effect */
+  color: var(--primary-color);
 }
 
 .dark button,
 [data-theme="dark"] button {
-  color: var(--text-color); /* Ensure text color matches dark theme */
+  color: var(--text-color);
 }
 
 /* Style for icon container to remove unwanted background */
@@ -126,11 +168,9 @@ button span {
   color: var(--primary-color);
 }
 
-
-
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 0 0% 100%; /* Light mode default */
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
     --card-foreground: 0 0% 3.9%;
@@ -165,11 +205,11 @@ button span {
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
   .dark {
-    --background: 0 0% 3.9%;
+    --background: 0 0% 9.8%; /* Slightly lighter dark mode */
     --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
+    --card: 0 0% 9.8%;
     --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
+    --popover: 0 0% 9.8%;
     --popover-foreground: 0 0% 98%;
     --primary: 0 0% 98%;
     --primary-foreground: 0 0% 9%;
@@ -199,8 +239,6 @@ button span {
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
-
-
 
 @layer base {
   * {
