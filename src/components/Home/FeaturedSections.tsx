@@ -16,19 +16,20 @@ const FeaturedSections: React.FC = () => {
   const featured = products.filter((p) => p.featured).slice(0, 4);
 
   const Section = ({ title, products, viewAllLink }: any) => (
-    <section className="py-16">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-3xl font-bold text-[var(--text-color)]">{title}</h2>
+    <section className="py-12 sm:py-16 bg-card">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-2xl sm:text-3xl font-bold text-text-primary">{title}</h2>
           <Link
             to={viewAllLink}
-            className={`flex items-center text-[var(--primary-color)] hover:text-[var(--hover-bg-color)] transition-colors ${isRTL ? 'space-x-reverse' : ''} space-x-1`}
+            className={`flex items-center text-primary hover:text-primary-600 transition-colors ${isRTL ? 'space-x-reverse' : ''} space-x-1`}
+            aria-label={t('viewAll', { defaultValue: 'View all products' })}
           >
-            <span>View All</span>
+            <span>{t('viewAll')}</span>
             <ChevronRightIcon className={`w-4 h-4 ${isRTL ? 'rotate-180' : ''}`} />
           </Link>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
           {products.map((product: any) => (
             <ProductCard key={product.id} product={product} />
           ))}
@@ -38,12 +39,10 @@ const FeaturedSections: React.FC = () => {
   );
 
   return (
-    <div className="bg-[var(--background-color)]">
+    <div>
       <Section title={t('newArrivals')} products={newArrivals} viewAllLink="/shop?filter=new" />
-      <div className="bg-[var(--card-bg-color)]">
-        <Section title={t('bestSellers')} products={bestSellers} viewAllLink="/shop?filter=bestseller" />
-      </div>
-      <Section title={t('myCuteBsbs')} products={featured} viewAllLink="/shop?filter=featured" />
+      <Section title={t('bestSellers')} products={bestSellers} viewAllLink="/shop?filter=bestseller" />
+      <Section title={t('featuredProducts')} products={featured} viewAllLink="/shop?filter=featured" />
     </div>
   );
 };

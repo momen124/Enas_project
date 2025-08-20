@@ -1,17 +1,17 @@
-import React from 'react';
-import { Fragment } from 'react';
+import React, { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import { XMarkIcon, MinusIcon, PlusIcon } from '@heroicons/react/24/outline';
+import { XMarkIcon, MinusIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useStore } from '../../store/useStore';
+import { toast } from 'react-hot-toast';
 
 const CartSidebar: React.FC = () => {
   const { t } = useTranslation();
-  const { cart, cartOpen, setCartOpen, updateQuantity, removeFromCart, language, currency } = useStore();
+  const { cart, cartOpen, setCartOpen, updateQuantity, removeFromCart, clearCart, language, currency } = useStore();
   const isRTL = language === 'ar';
 
-  const subtotal = cart.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
+  const subtotal = cart.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
   const shipping = subtotal > 1000 ? 0 : 50;
   const tax = subtotal * 0.14; // 14% VAT in Egypt
   const total = subtotal + shipping + tax;
@@ -20,6 +20,23 @@ const CartSidebar: React.FC = () => {
     const symbol = currency === 'EGP' ? 'ج.م' : currency === 'USD' ? '$' : '€';
     const convertedPrice = currency === 'EGP' ? price : currency === 'USD' ? price / 30 : price / 32;
     return `${convertedPrice.toFixed(2)} ${symbol}`;
+  };
+
+  const handleClearCart = () => {
+    clearCart();
+    toast.success(t('cartCleared', { defaultValue: 'Cart cleared successfully' }));
+  };
+
+  const handleUpdateQuantity = (id: string, quantity: number, stock: number) => {
+    if (quantity <= 0 || quantity > stock) {
+      toast.error(
+        quantity <= 0
+          ? t('minQuantity', { defaultValue: 'Quantity cannot be less than 1' })
+          : t('maxQuantity', { defaultValue: 'Quantity exceeds available stock' })
+      );
+      return;
+    }
+    updateQuantity(id, quantity);
   };
 
   return (
@@ -34,12 +51,12 @@ const CartSidebar: React.FC = () => {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+          <div className="fixed inset-0 bg-neutral-700 bg-opacity-75 transition-opacity" />
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-hidden">
           <div className="absolute inset-0 overflow-hidden">
-            <div className={`pointer-events-none fixed inset-y-0 flex max-w-full ${isRTL ? 'left-0' : 'right-0'}`}>
+            <div className={`pointer-events-none fixed inset-y-0 flex max-w-lg ${isRTL ? 'left-0' : 'right-0'}`}>
               <Transition.Child
                 as={Fragment}
                 enter="transform transition ease-in-out duration-500"
@@ -49,93 +66,109 @@ const CartSidebar: React.FC = () => {
                 leaveFrom="translate-x-0"
                 leaveTo={isRTL ? '-translate-x-full' : 'translate-x-full'}
               >
-                <Dialog.Panel className="pointer-events-auto w-screen max-w-md">
-                  <div className="flex h-full flex-col overflow-y-scroll bg-[var(--background-color)] shadow-xl">
-                    <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
-                      <div className="flex items-start justify-between">
-                        <Dialog.Title className="text-lg font-medium text-[var(--text-color)]">
+                <Dialog.Panel className="pointer-events-auto w-screen max-w-lg animate-fade-in">
+                  <div className="flex h-full flex-col overflow-y-auto bg-card shadow-xl scroll-smooth">
+                    <div className="flex-1 overflow-y-auto px-4 sm:px-6 py-6">
+                      <div className="flex items-center justify-between">
+                        <Dialog.Title className="text-xl font-semibold text-text-primary">
                           {t('shoppingCart')}
                         </Dialog.Title>
-                        <div className={`ml-3 flex h-7 items-center ${isRTL ? 'mr-3 ml-0' : ''}`}>
+                        <div className={`flex items-center gap-4 ${isRTL ? 'mr-4' : 'ml-4'}`}>
+                          {cart.length > 0 && (
+                            <button
+                              type="button"
+                              className="text-sm font-medium text-error-500 hover:text-error-600 transition-colors"
+                              onClick={handleClearCart}
+                              aria-label={t('clearCart', { defaultValue: 'Clear all items from cart' })}
+                            >
+                              {t('clearCart', { defaultValue: 'Clear All' })}
+                            </button>
+                          )}
                           <button
                             type="button"
-                            className="-m-2 p-2 text-[var(--secondary-text-color)] hover:text-[var(--primary-color)]"
+                            className="p-2 text-text-secondary hover:text-primary rounded-full focus:outline-none focus:ring-2 focus:ring-primary"
                             onClick={() => setCartOpen(false)}
+                            aria-label={t('closeCart', { defaultValue: 'Close cart' })}
                           >
                             <XMarkIcon className="h-6 w-6" />
                           </button>
                         </div>
                       </div>
 
-                      <div className="mt-8">
+                      <div className="mt-6">
                         {cart.length === 0 ? (
-                          <div className="text-center py-12">
-                            <p className="text-[var(--secondary-text-color)] mb-4">{t('cartEmpty')}</p>
+                          <div className="text-center py-8">
+                            <p className="text-text-secondary mb-4">{t('cartEmpty')}</p>
                             <Link
                               to="/shop"
                               onClick={() => setCartOpen(false)}
-                              className="inline-block bg-[var(--primary-color)] text-[var(--cream-white-500)] px-6 py-2 rounded-lg hover:bg-[var(--primary-800)] transition-colors"
+                              className="inline-block bg-primary text-card px-6 py-2 rounded-lg font-semibold hover:bg-primary-600 transition-colors shadow-medium hover:shadow-glow"
+                              aria-label={t('continueShopping')}
                             >
                               {t('continueShopping')}
                             </Link>
                           </div>
                         ) : (
                           <div className="flow-root">
-                            <ul role="list" className="-my-6 divide-y divide-[var(--border-color)]">
+                            <ul role="listbox" className="-my-6 divide-y divide-border">
                               {cart.map((item) => (
-                                <li key={item.id} className="flex py-6">
-                                  <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-[var(--border-color)]">
+                                <li key={item.id} className="flex py-4 sm:py-6">
+                                  <div className="h-20 w-20 sm:h-24 sm:w-24 flex-shrink-0 overflow-hidden rounded-md border border-border">
                                     <img
                                       src={item.color.image}
                                       alt={isRTL ? item.product.nameAr : item.product.name}
                                       className="h-full w-full object-cover object-center"
+                                      loading="lazy"
                                     />
                                   </div>
 
-                                  <div className={`ml-4 flex flex-1 flex-col ${isRTL ? 'mr-4 ml-0' : ''}`}>
+                                  <div className={`flex flex-1 flex-col ${isRTL ? 'mr-4' : 'ml-4'}`}>
                                     <div>
-                                      <div className="flex justify-between text-base font-medium text-[var(--text-color)]">
+                                      <div className="flex justify-between text-base font-medium text-text-primary">
                                         <h3>
                                           <Link
                                             to={`/product/${item.product.id}`}
                                             onClick={() => setCartOpen(false)}
+                                            aria-label={isRTL ? item.product.nameAr : item.product.name}
                                           >
                                             {isRTL ? item.product.nameAr : item.product.name}
                                           </Link>
                                         </h3>
-                                        <p className={`ml-4 ${isRTL ? 'mr-4 ml-0' : ''}`}>
+                                        <p className={`min-w-[4rem] text-right ${isRTL ? 'mr-4' : 'ml-4'}`}>
                                           {formatPrice(item.product.price * item.quantity)}
                                         </p>
                                       </div>
-                                      <p className="mt-1 text-sm text-[var(--secondary-text-color)]">
+                                      <p className="mt-1 text-sm text-text-secondary">
                                         {isRTL ? item.color.nameAr : item.color.name} • {item.size}
                                       </p>
                                     </div>
                                     <div className="flex flex-1 items-end justify-between text-sm">
-                                      <div className="flex items-center">
+                                      <div className="flex items-center gap-2">
                                         <button
-                                          onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                                          className="p-1 hover:bg-[var(--hover-bg-color)] rounded"
+                                          onClick={() => handleUpdateQuantity(item.id, item.quantity - 1, item.product.stock)}
+                                          className="p-2 bg-card hover:bg-hover-bg-color rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary"
+                                          aria-label={t('decreaseQuantity', { defaultValue: 'Decrease quantity' })}
                                         >
-                                          <MinusIcon className="w-4 h-4 text-[var(--text-color)]" />
+                                          <MinusIcon className="w-4 h-4 text-text-primary" />
                                         </button>
-                                        <span className="mx-2 min-w-[2rem] text-center text-[var(--text-color)]">
+                                        <span className="min-w-[2.5rem] text-center text-text-primary font-medium">
                                           {item.quantity}
                                         </span>
                                         <button
-                                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                                          className="p-1 hover:bg-[var(--hover-bg-color)] rounded"
+                                          onClick={() => handleUpdateQuantity(item.id, item.quantity + 1, item.product.stock)}
+                                          className="p-2 bg-card hover:bg-hover-bg-color rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary"
+                                          aria-label={t('increaseQuantity', { defaultValue: 'Increase quantity' })}
                                         >
-                                          <PlusIcon className="w-4 h-4 text-[var(--text-color)]" />
+                                          <PlusIcon className="w-4 h-4 text-text-primary" />
                                         </button>
                                       </div>
-
                                       <button
                                         type="button"
                                         onClick={() => removeFromCart(item.id)}
-                                        className="font-medium text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300"
+                                        className="font-medium text-error-500 hover:text-error-600 transition-colors focus:outline-none focus:ring-2 focus:ring-error-500"
+                                        aria-label={t('removeItem', { defaultValue: 'Remove item from cart' })}
                                       >
-                                        {t('remove')}
+                                        <TrashIcon className="w-5 h-5" />
                                       </button>
                                     </div>
                                   </div>
@@ -148,21 +181,21 @@ const CartSidebar: React.FC = () => {
                     </div>
 
                     {cart.length > 0 && (
-                      <div className="border-t border-[var(--border-color)] px-4 py-6 sm:px-6">
-                        <div className="space-y-2 text-sm">
-                          <div className="flex justify-between text-[var(--text-color)]">
+                      <div className="border-t border-border px-4 sm:px-6 py-6">
+                        <div className="space-y-3 text-sm">
+                          <div className="flex justify-between text-text-primary">
                             <span>{t('subtotal')}</span>
                             <span>{formatPrice(subtotal)}</span>
                           </div>
-                          <div className="flex justify-between text-[var(--text-color)]">
+                          <div className="flex justify-between text-text-primary">
                             <span>{t('shipping')}</span>
-                            <span>{shipping === 0 ? 'Free' : formatPrice(shipping)}</span>
+                            <span>{shipping === 0 ? t('free', { defaultValue: 'Free' }) : formatPrice(shipping)}</span>
                           </div>
-                          <div className="flex justify-between text-[var(--text-color)]">
+                          <div className="flex justify-between text-text-primary">
                             <span>{t('tax')}</span>
                             <span>{formatPrice(tax)}</span>
                           </div>
-                          <div className="flex justify-between text-base font-medium text-[var(--text-color)] border-t border-[var(--border-color)] pt-2">
+                          <div className="flex justify-between text-base font-semibold text-text-primary border-t border-border pt-3">
                             <span>{t('total')}</span>
                             <span>{formatPrice(total)}</span>
                           </div>
@@ -171,18 +204,20 @@ const CartSidebar: React.FC = () => {
                           <Link
                             to="/checkout"
                             onClick={() => setCartOpen(false)}
-                            className="flex items-center justify-center rounded-md border border-transparent bg-[var(--primary-color)] text-[var(--cream-white-500)] px-6 py-3 text-base font-medium shadow-sm hover:bg-[var(--primary-800)] transition-colors w-full"
+                            className="block text-center bg-primary text-card px-6 py-3 rounded-lg font-semibold shadow-medium hover:bg-primary-600 hover:shadow-glow transition-all duration-300"
+                            aria-label={t('checkout')}
                           >
                             {t('checkout')}
                           </Link>
                         </div>
-                        <div className="mt-6 flex justify-center text-center text-sm text-[var(--secondary-text-color)]">
+                        <div className="mt-4 flex justify-center text-sm text-text-secondary">
                           <p>
-                            or{' '}
+                            {t('or', { defaultValue: 'or' })}{' '}
                             <button
                               type="button"
-                              className="font-medium text-[var(--primary-color)] hover:text-[var(--primary-800)]"
+                              className="font-medium text-primary hover:text-primary-600 transition-colors focus:outline-none focus:ring-2 focus:ring-primary"
                               onClick={() => setCartOpen(false)}
+                              aria-label={t('continueShopping')}
                             >
                               {t('continueShopping')}
                             </button>
